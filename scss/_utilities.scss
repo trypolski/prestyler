@@ -1,0 +1,127 @@
+$custom-utilities: (
+  //
+  // Margin classes where ${m - margin}${x, y, t, r, b, l - left + right, top + bottom, top, right, bottom, left}-${xs, s, m, l, xl, xxl - spaces from $spaces variable}
+  //
+  // Examples: .m-m { margin: 1rem; } | .mx-xs { margin-left: 0.25rem; margin-right: 0.25rem; } | .mb-xl { margin-bottom: 2rem; }
+  "margin": (
+    property: margin,
+    class: m,
+    values: $spaces
+  ),
+  "margin-x": (
+    property: margin-left margin-right,
+    class: mx,
+    values: $spaces
+  ),
+  "margin-y": (
+    property: margin-top margin-bottom,
+    class: my,
+    values: $spaces
+  ),
+  "margin-top": (
+    property: margin-top,
+    class: mt,
+    values: $spaces
+  ),
+  "margin-right": (
+    property: margin-right,
+    class: mr,
+    values: $spaces
+  ),
+  "margin-bottom": (
+    property: margin-bottom,
+    class: mb,
+    values: $spaces
+  ),
+  "margin-left": (
+    property: margin-left,
+    class: ml,
+    values: $spaces
+  ),
+  //
+  // Padding classes where ${p - padding}${x, y, t, r, b, l - left + right, top + bottom, top, right, bottom, left}-${xs, s, m, l, xl, xxl - spaces from $spaces variable}
+  //
+  // Examples: .p-m { padding: 1rem; } | .px-s { padding-left: 0.5rem; padding-right: 0.5rem; } | .pt-l { padding-top: 1.5rem; }
+  "padding": (
+    property: padding,
+    class: p,
+    values: $spaces
+  ),
+  "padding-x": (
+    property: padding-left padding-right,
+    class: px,
+    values: $spaces
+  ),
+  "padding-y": (
+    property: padding-top padding-bottom,
+    class: py,
+    values: $spaces
+  ),
+  "padding-top": (
+    property: padding-top,
+    class: pt,
+    values: $spaces
+  ),
+  "padding-right": (
+    property: padding-right,
+    class: pr,
+    values: $spaces
+  ),
+  "padding-bottom": (
+    property: padding-bottom,
+    class: pb,
+    values: $spaces
+  ),
+  "padding-left": (
+    property: padding-left,
+    class: pl,
+    values: $spaces
+  ),
+  //
+  // Opacity classes
+  //
+  // Examples: .opacity-50 { opacity: 50%; } | .opacity-100 { opacity: 100%; }
+  "opacity": (
+    property: opacity,
+    class: opacity,
+    values: (
+      0: 0%,
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%
+    )
+  ),
+  //
+  // Text alignment classes
+  //
+  // Examples: .text-center { text-align: center; }
+  "text-center": (
+    property: text-align,
+    class: text,
+    values: (
+      center: "center",
+      right: "right"
+    )
+  ),
+  //
+  // Visibility classes
+  //
+  // Examples: .hidden { visibility: hidden }
+  "hidden": (
+    property: visibility,
+    class: hidden,
+    values: ("": "hidden")
+  ),
+  // Examples: .visible { visibility: visible }
+  "visible": (
+    property: visibility,
+    class: visible,
+    values: ("": "visible")
+  ),
+);
+
+// Generate utilities classes
+@each $key, $value in $custom-utilities {
+  @include generate-classes($value)
+}

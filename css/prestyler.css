@@ -1,0 +1,457 @@
+.m-0 {
+  margin: 0;
+}
+
+.m-xs {
+  margin: 4px;
+}
+
+.m-s {
+  margin: 8px;
+}
+
+.m-m {
+  margin: 16px;
+}
+
+.m-l {
+  margin: 24px;
+}
+
+.m-xl {
+  margin: 32px;
+}
+
+.m-xxl {
+  margin: 40px;
+}
+
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.mx-xs {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.mx-s {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.mx-m {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.mx-l {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.mx-xl {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+
+.mx-xxl {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.my-xs {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.my-s {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.my-m {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.my-l {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.my-xl {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.my-xxl {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-xs {
+  margin-top: 4px;
+}
+
+.mt-s {
+  margin-top: 8px;
+}
+
+.mt-m {
+  margin-top: 16px;
+}
+
+.mt-l {
+  margin-top: 24px;
+}
+
+.mt-xl {
+  margin-top: 32px;
+}
+
+.mt-xxl {
+  margin-top: 40px;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mr-xs {
+  margin-right: 4px;
+}
+
+.mr-s {
+  margin-right: 8px;
+}
+
+.mr-m {
+  margin-right: 16px;
+}
+
+.mr-l {
+  margin-right: 24px;
+}
+
+.mr-xl {
+  margin-right: 32px;
+}
+
+.mr-xxl {
+  margin-right: 40px;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-xs {
+  margin-bottom: 4px;
+}
+
+.mb-s {
+  margin-bottom: 8px;
+}
+
+.mb-m {
+  margin-bottom: 16px;
+}
+
+.mb-l {
+  margin-bottom: 24px;
+}
+
+.mb-xl {
+  margin-bottom: 32px;
+}
+
+.mb-xxl {
+  margin-bottom: 40px;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.ml-xs {
+  margin-left: 4px;
+}
+
+.ml-s {
+  margin-left: 8px;
+}
+
+.ml-m {
+  margin-left: 16px;
+}
+
+.ml-l {
+  margin-left: 24px;
+}
+
+.ml-xl {
+  margin-left: 32px;
+}
+
+.ml-xxl {
+  margin-left: 40px;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-xs {
+  padding: 4px;
+}
+
+.p-s {
+  padding: 8px;
+}
+
+.p-m {
+  padding: 16px;
+}
+
+.p-l {
+  padding: 24px;
+}
+
+.p-xl {
+  padding: 32px;
+}
+
+.p-xxl {
+  padding: 40px;
+}
+
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.px-xs {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.px-s {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.px-m {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.px-l {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.px-xl {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.px-xxl {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.py-xs {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.py-s {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-m {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.py-l {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.py-xl {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.py-xxl {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pt-xs {
+  padding-top: 4px;
+}
+
+.pt-s {
+  padding-top: 8px;
+}
+
+.pt-m {
+  padding-top: 16px;
+}
+
+.pt-l {
+  padding-top: 24px;
+}
+
+.pt-xl {
+  padding-top: 32px;
+}
+
+.pt-xxl {
+  padding-top: 40px;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pr-xs {
+  padding-right: 4px;
+}
+
+.pr-s {
+  padding-right: 8px;
+}
+
+.pr-m {
+  padding-right: 16px;
+}
+
+.pr-l {
+  padding-right: 24px;
+}
+
+.pr-xl {
+  padding-right: 32px;
+}
+
+.pr-xxl {
+  padding-right: 40px;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.pb-xs {
+  padding-bottom: 4px;
+}
+
+.pb-s {
+  padding-bottom: 8px;
+}
+
+.pb-m {
+  padding-bottom: 16px;
+}
+
+.pb-l {
+  padding-bottom: 24px;
+}
+
+.pb-xl {
+  padding-bottom: 32px;
+}
+
+.pb-xxl {
+  padding-bottom: 40px;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pl-xs {
+  padding-left: 4px;
+}
+
+.pl-s {
+  padding-left: 8px;
+}
+
+.pl-m {
+  padding-left: 16px;
+}
+
+.pl-l {
+  padding-left: 24px;
+}
+
+.pl-xl {
+  padding-left: 32px;
+}
+
+.pl-xxl {
+  padding-left: 40px;
+}
+
+.opacity-0 {
+  opacity: 0%;
+}
+
+.opacity-25 {
+  opacity: 25%;
+}
+
+.opacity-50 {
+  opacity: 50%;
+}
+
+.opacity-75 {
+  opacity: 75%;
+}
+
+.opacity-100 {
+  opacity: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+/*# sourceMappingURL=prestyler.css.map */

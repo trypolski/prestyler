@@ -1,0 +1,15 @@
+// Generate classes using generate-classes utility mixin
+@mixin generate-classes($class-data) {
+  $class-name: map-get($class-data, class);
+  $class-properties: map-get($class-data, property);
+  $values: map-get($class-data, values);
+
+  @each $v-key, $v-value in $values {
+    $suffix: if($v-key == "", "", -#{$v-key});
+    .#{$class-name}#{$suffix} {
+      @each $class-property in $class-properties {
+        #{$class-property}: #{$v-value};
+      }
+    }
+  }
+}

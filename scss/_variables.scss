@@ -1,0 +1,197 @@
+//
+// VARIABLES
+//
+
+// Prefix for :root CSS variables
+$default-prefix: ps- !default;
+$prefix: $default-prefix !default;
+
+// 
+// Colors
+//
+$white: #ffffff !default;
+$black: #000000 !default;
+$gray-900: #111826 !default;
+$gray-100: #f8f9fa !default;
+// $gray-200: #e9ecef !default;
+// $gray-300: #dee2e6 !default;
+// $gray-400: #ced4da !default;
+// $gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+// $gray-700: #495057 !default;
+// $gray-800: #343a40 !default;
+
+$blue: #0d6efd !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+
+// scss-docs-start theme-color-variables
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+// Gradiens - add only after checking the need
+// $gradient: linear-gradient(180deg, rgba($white, .15), rgba($white, 0)) !default;
+
+//
+// <body>
+//
+$body-background-color: $white !default;
+$body-color: $gray-900 !default;
+
+//
+// Links
+//
+$link-color: $primary !default;
+$link-decoration: underline !default;
+$link-shade-percentage: 25% !default;
+$link-hover-color: mix(black, $link-color, $link-shade-percentage) !default;
+$link-hover-decoration: null !default;
+
+// Paragraphs
+
+//
+// Spaces
+//
+$space: 1rem !default;
+$spaces: (
+  0: 0,
+  xs: $space * .25,
+  s: $space * .5,
+  m: $space,
+  l: $space * 1.5,
+  xl: $space * 2,
+  xxl: $space * 2.5,
+) !default;
+
+//
+// Grid
+//
+
+// $grid-breakpoints
+$container-min-width: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+$grid-columns: 12 !default;
+$grid-gutter-width: 1.5rem !default;
+$grid-row-columns: 6 !default;
+$container-padding-x: $grid-gutter-width !default;
+
+//
+// Border radius
+//
+$border-radius-base: 0.75rem !default;
+
+$border-radius-s: 0.25rem !default;
+$border-radius-l: 0.5rem !default;
+$border-radius-xl: 1rem !default;
+$border-radius-xxl: 2rem !default;
+$border-radius-rounded: 55.5rem !default;
+
+//
+// Box shadow
+//
+$box-shadow-s: 0 0.063rem 0.188rem rgba($black, 0.12), 0 0.063rem 0.125rem rgba($black,0.24) !default;
+$box-shadow-l: 0 0.188rem 0.375rem rgba($black, 0.16), 0 0.188rem 0.375rem rgba($black, 0.23) !default;
+$box-shadow-xl: 0 0.625rem 1.25rem rgba($black, 0.19), 0 0.375rem 0.375rem rgba($black, 0.23) !default;
+$box-shadow-hover: 0 0.875rem 1.75rem rgba($black, 0.25), 0 0.625rem 0.625rem rgba($black, 0.22) !default;
+$box-shadow-hover-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !default;
+
+$box-shadow-base: $box-shadow-s !default;
+
+//
+// Transitions
+//
+$transition-collapse-x: width 0.3s ease !default;
+$transition-collapse-y: height 0.3s ease !default;
+
+//
+// Typography
+//
+
+// Font family
+$font-family-base: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-code: SFMono-Regular, Monaco, Consolas, Menlo, "Liberation Mono", "Courier New", monospace !default;
+
+// Font size
+$font-size-base: 1rem !default;
+
+$font-size-s: $font-size-base * 0.875rem !default;
+$font-size-l: $font-size-base * 1.125rem !default;
+$font-size-xl: $font-size-base * 1.25rem !default;
+
+// Font weight
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+$font-weight-base: $font-weight-normal !default;
+
+// Line height
+$line-height-base: 0.5 !default;
+
+$line-height-s: 1.25 !default;
+$line-height-l: 2 !default;
+
+// Headings
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.8 !default;
+$h3-font-size: $font-size-base * 1.6 !default;
+$h4-font-size: $font-size-base * 1.4 !default;
+$h5-font-size: $font-size-base * 1.2 !default;
+$h6-font-size: $font-size-base !default;
+
+$headings-margin: 0 !default;
+
+//
+// Tables
+//
+// TODO: add tables variables
+
+
+//
+// Shared paddings
+//
+$element-padding-x: 1rem !default;
+$element-padding-y: 0.5rem !default;
+$element-font-size: $font-size-base !default;
+$element-line-height: $line-height-base !default;
+
+$element-padding-x-s: 0.5rem !default;
+$element-padding-y-s: 0.25rem !default;
+$element-font-size-s: $font-size-s !default;
+
+$element-padding-x-l: 1rem !default;
+$element-padding-y-l: 0.5rem !default;
+$element-font-size-l: $font-size-l !default;
+
+//
+// Buttons
+//

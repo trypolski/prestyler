@@ -1,0 +1,44 @@
+{
+  "name": "prestyles",
+  "version": "1.0.0",
+  "description": "Styles for every project",
+  "main": "index.js",
+  "scripts": {
+    "css:compile": "sass scss/prestyler.scss css/prestyler.css",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trypolski/prestyles.git"
+  },
+  "keywords": [
+    "styles",
+    "css",
+    "sass",
+    "mobile",
+    "responsive",
+    "front-end",
+    "web"
+  ],
+  "author": "Oleksandr Trypolskyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trypolski/prestyles/issues"
+  },
+  "homepage": "https://github.com/trypolski/prestyles#readme",
+  "sass": "scss/prestyles.scss",
+  "style": "dist/css/prestyles.css",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  },
+  "files": [
+    "dist/{css,js}/*.{css,js,map}",
+    "js/{src,dist}/**/*.{js,map}",
+    "scss/**/*.scss",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "sass": "^1.57.1"
+  }
+}
