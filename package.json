@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "css:compile": "sass scss/prestyler.scss css/prestyler.css",
-    "test": "mocha"
+    "test": "jest scss/tests"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,6 @@
   "homepage": "https://github.com/trypolski/prestyles#readme",
   "sass": "scss/prestyles.scss",
   "style": "dist/css/prestyles.css",
-  "devDependencies": {
-    "mocha": "^8.2.1"
-  },
   "files": [
     "dist/{css,js}/*.{css,js,map}",
     "js/{src,dist}/**/*.{js,map}",
@@ -40,5 +37,11 @@
   ],
   "dependencies": {
     "sass": "^1.57.1"
+  },
+  "devDependencies": {
+    "glob": "^8.0.3",
+    "jest": "^29.3.1",
+    "node-sass": "^8.0.0",
+    "sass-true": "^6.1.0"
   }
 }

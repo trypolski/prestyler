@@ -1,0 +1,101 @@
+@use 'true' as *;
+@import '../../variables';
+@import '../../mixins/utilities';
+
+@mixin test-generate-classes($params...) {
+  @include assert() {
+    @include output() {
+      @include generate-classes($params...);
+    }
+
+    @include expect() {
+      @content;
+    }
+  }
+}
+
+@include describe('generate-classes()') {
+  @include it('should return correct set of margins with default spaces') {
+    @include test-generate-classes((
+      property: margin,
+      class: m,
+      values: $spaces
+    )) {
+      .m-0 {
+        margin: 0 !important;
+      }
+      
+      .m-xs {
+        margin: 0.25rem !important;
+      }
+      
+      .m-s {
+        margin: 0.5rem !important;
+      }
+      
+      .m-m {
+        margin: 1rem !important;
+      }
+      
+      .m-l {
+        margin: 1.5rem !important;
+      }
+      
+      .m-xl {
+        margin: 2rem !important;
+      }
+      
+      .m-xxl {
+        margin: 2.5rem !important;
+      }
+    }
+  }
+
+  @include it('should return correct set of classes if values options is a list') {
+    @include test-generate-classes((
+      property: text-align,
+      class: text,
+      values: ( center, right )
+    )) {
+      .text-center {
+        text-align: center !important;
+      }
+      
+      .text-right {
+        text-align: right !important;
+      }
+    }
+  }
+
+  @include it('should return classes without !important if $enable-important-for-utilities-classes is false') {
+    $enable-important-for-utilities-classes: false !global;;
+
+    @include test-generate-classes((
+      property: text-align,
+      class: text,
+      values: ( center, right )
+    )) {
+      .text-center {
+        text-align: center;
+      }
+      
+      .text-right {
+        text-align: right;
+      }
+    }
+
+    $enable-important-for-utilities-classes: true !global;
+  }
+
+  @include it('should return class without suffix if values options has map with empty property name') {
+     @include test-generate-classes((
+      property: visibility,
+      class: hidden,
+      values: ("": hidden)
+    )) {
+      .hidden {
+        visibility: hidden !important;
+      }
+    }
+  }
+}

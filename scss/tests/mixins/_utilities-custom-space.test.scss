@@ -1,0 +1,61 @@
+$space: 16px;
+@use 'true' as *;
+@import '../../variables';
+@import '../../mixins/utilities';
+
+@mixin test-generate-classes($params...) {
+  @include assert() {
+    @include output() {
+      @include generate-classes($params...);
+    }
+
+    @include expect() {
+      @content;
+    }
+  }
+}
+
+@include describe('generate-classes()') {
+  @include it('should return set of paddings with updated spaces if $space is changed') {
+    @include test-generate-classes((
+      property: padding-top padding-bottom,
+      class: py,
+      values: $spaces
+    )) {
+      .py-0 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      
+      .py-xs {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+      }
+      
+      .py-s {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+      }
+      
+      .py-m {
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+      }
+      
+      .py-l {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      
+      .py-xl {
+        padding-top: 32px !important;
+        padding-bottom: 32px !important;
+      }
+      
+      .py-xxl {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+      }
+    }
+  }
+}
