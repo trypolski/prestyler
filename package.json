@@ -4,7 +4,9 @@
   "description": "Styles for every project",
   "main": "index.js",
   "scripts": {
-    "css:compile": "sass scss/prestyler.scss css/prestyler.css",
+    "css:compile": "npm run css:compile-to-css & npm run css:compile-to-docs",
+    "css:compile-to-css": "sass scss/prestyler.scss css/prestyler.css",
+    "css:compile-to-docs": "sass scss/prestyler.scss docs/prestyler.css",
     "test": "jest scss/tests"
   },
   "repository": {
