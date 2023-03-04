@@ -124,7 +124,50 @@ $custom-utilities: (
     property: display,
     class: d,
     values: ( inline, inline-block, block, grid, table, table-row, table-cell, flex, inline-flex, none )
-  )
+  ),
+  //
+  // Flex classes where {f - flex}-{r, c, w, jc, ai - flex-direction row, flex-direction column, flex-wrap, justify-content, align-items}
+  //
+  "flex-direction": (
+    property: flex-direction,
+    class: f,
+    values: (
+      r: row,
+      c: column
+    )
+  ),
+  "flex-wrap": (
+    property: flex-wrap,
+    class: f-w,
+    values: (
+      wrap: wrap,
+      wrap-reverse: wrap-reverse
+    )
+  ),
+  "flex-justify-content": (
+    property: justify-content,
+    class: f-jc,
+    values: (
+      start: flex-start,
+      end: flex-end,
+      center: center,
+      space-around: space-around,
+      space-between: space-between,
+      space-evenly: space-evenly
+    )
+  ),
+  "flex-align-items": (
+    property: align-items,
+    class: f-ai,
+    values: (
+      start: flex-start,
+      end: flex-end,
+      center: center,
+      space-around: space-around,
+      space-between: space-between,
+      space-evenly: space-evenly
+    )
+  ),
 );
 
 // Generate utilities classes
