@@ -126,11 +126,11 @@ $custom-utilities: (
     values: ( inline, inline-block, block, grid, table, table-row, table-cell, flex, inline-flex, none )
   ),
   //
-  // Flex classes where {f - flex}-{r, c, w, jc, ai - flex-direction row, flex-direction column, flex-wrap, justify-content, align-items}
+  // Flex classes where {flex}-{r, c, w, jc, ai - flex-direction row, flex-direction column, flex-wrap, justify-content, align-items}
   //
   "flex-direction": (
     property: flex-direction,
-    class: f,
+    class: flex,
     values: (
       r: row,
       c: column
@@ -138,7 +138,7 @@ $custom-utilities: (
   ),
   "flex-wrap": (
     property: flex-wrap,
-    class: f-w,
+    class: flex-w,
     values: (
       wrap: wrap,
       wrap-reverse: wrap-reverse
@@ -146,26 +146,54 @@ $custom-utilities: (
   ),
   "flex-justify-content": (
     property: justify-content,
-    class: f-jc,
+    class: flex-jc,
     values: (
       start: flex-start,
       end: flex-end,
       center: center,
-      space-around: space-around,
-      space-between: space-between,
-      space-evenly: space-evenly
+      around: space-around,
+      between: space-between,
+      evenly: space-evenly
     )
   ),
   "flex-align-items": (
     property: align-items,
-    class: f-ai,
+    class: flex-ai,
     values: (
       start: flex-start,
       end: flex-end,
       center: center,
-      space-around: space-around,
-      space-between: space-between,
-      space-evenly: space-evenly
+      around: space-around,
+      between: space-between,
+      evenly: space-evenly
+    )
+  ),
+  //
+  // Width classes where {w - width}-{auto, 25, 50, 75, 100 - width: auto, width: 25%, width: 50%, width: 75%, width - 100%}
+  //
+  "width": (
+    property: width,
+    class: w,
+    values: (
+      auto: auto,
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%
+    )
+  ),
+  //
+  // Height classes where {h - height}-{auto, 25, 50, 75, 100 - height: auto, height: 25%, height: 50%, height: 75%, height - 100%}
+  //
+  "height": (
+    property: height,
+    class: h,
+    values: (
+      auto: auto,
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%
     )
   ),
 );
