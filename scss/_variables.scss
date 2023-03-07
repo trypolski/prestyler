@@ -147,9 +147,9 @@ $font-family-code: SFMono-Regular, Monaco, Consolas, Menlo, "Liberation Mono", "
 // Font size
 $font-size-base: 1rem !default;
 
-$font-size-s: $font-size-base * 0.875rem !default;
-$font-size-l: $font-size-base * 1.125rem !default;
-$font-size-xl: $font-size-base * 1.25rem !default;
+$font-size-s: $font-size-base * 0.875 !default;
+$font-size-l: $font-size-base * 1.125 !default;
+$font-size-xl: $font-size-base * 1.25 !default;
 
 // Font weight
 $font-weight-light: 300 !default;
