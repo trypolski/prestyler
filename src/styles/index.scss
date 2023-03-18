@@ -1,4 +1,26 @@
 // Styles for all pages
 body {
   margin: 0;
+  display: flex;
+  background-color: #1e252c;
 }
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 192px;
+  background-color: #081828;
+  color: #fff;
+
+  h1 {
+    padding: 16px;
+  }
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

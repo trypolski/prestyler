@@ -1,0 +1,60 @@
+.code-example-wrapper {
+	max-width: 600px;
+	min-width: 600px;
+	height: fit-content;
+	color: #adb5bd;
+	display: block;
+	background-color: #262f38;
+	border-radius: 8px;
+	position: relative;
+	margin-top: 16px;
+
+	pre {
+		.p {
+			color: #abb2bf;
+		}
+	
+		.nt {
+			color: #e06c75;
+		}
+	
+		.na {
+			color: #e5c07b;
+		}
+	
+		.o {
+			color: #abb2bf;
+		}
+	
+		.s {
+			color: #56b6c2;
+		}
+	
+		.cp {
+			color: #e06c75;
+		}
+	}
+
+	.code-example-copy-button {
+		width: 50px;
+		height: 50px;
+		position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #262f38;
+		border: none;
+		text-decoration: none;
+		color: #abb2bf;
+		cursor: pointer;
+		text-align: center;
+		border-radius: 8px;
+
+		.svg {
+			fill: #abb2bf;
+			&:hover {
+				fill: #6ea8fe;
+			}
+		}
+	}
+}
+
