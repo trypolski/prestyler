@@ -1,8 +1,11 @@
 {
-  "name": "prestyles",
-  "version": "1.0.0",
+  "name": "prestyler",
+  "version": "0.0.1",
   "description": "Styles for every project",
   "main": "index.js",
+  "bin": {
+    "prestyler-build-bs": "./cli/build-bs-css.js"
+  },
   "scripts": {
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
@@ -13,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trypolski/prestyles.git"
+    "url": "git+https://github.com/trypolski/prestyler.git"
   },
   "keywords": [
     "styles",
@@ -27,11 +30,11 @@
   "author": "Oleksandr Trypolskyi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/trypolski/prestyles/issues"
+    "url": "https://github.com/trypolski/prestyler/issues"
   },
-  "homepage": "https://github.com/trypolski/prestyles#readme",
-  "sass": "scss/prestyles.scss",
-  "style": "dist/css/prestyles.css",
+  "homepage": "https://github.com/trypolski/prestyler#readme",
+  "sass": "scss/prestyler.scss",
+  "style": "dist/css/prestyler.css",
   "files": [
     "dist/{css,js}/*.{css,js,map}",
     "js/{src,dist}/**/*.{js,map}",
@@ -40,6 +43,7 @@
     "README.md"
   ],
   "dependencies": {
+    "bootstrap": "^5.3.6",
     "sass": "^1.57.1"
   },
   "devDependencies": {
@@ -50,6 +54,9 @@
     "jest": "^29.3.1",
     "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "^8.0.0",
+    "postcss": "^8.5.4",
+    "postcss-cli": "^11.0.1",
+    "postcss-prefixer": "^3.0.0",
     "sass-loader": "^13.2.0",
     "sass-true": "^6.1.0",
     "webpack": "^5.75.0",
