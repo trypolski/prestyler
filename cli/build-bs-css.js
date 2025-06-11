@@ -91,4 +91,18 @@ try {
   // Ignore cleanup error
 }
 
+// -----------------------------
+// Write config file
+// -----------------------------
+
+const configPath = path.join(outDir, "prestyler.config.json");
+
+try {
+  const configJson = { prefix };
+  fs.writeFileSync(configPath, JSON.stringify(configJson, null, 2), "utf8");
+  log(`Wrote prefix config to: ${configPath}`);
+} catch (err) {
+  fail(`Failed to write config file: ${err.message}`);
+}
+
 console.log(`✅ Bootstrap CSS built successfully at: ${outCss}`);

@@ -1,8 +1,13 @@
 {
   "name": "prestyler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Styles for every project",
   "main": "index.js",
+  "exports": {
+    ".": "./exports/index.js",
+    "./react": "./exports/react.js",
+    "./handlebars": "./exports/handlebars.js"
+  },
   "bin": {
     "prestyler-build-bs": "./cli/build-bs-css.js"
   },
@@ -36,6 +41,7 @@
   "sass": "scss/prestyler.scss",
   "style": "dist/css/prestyler.css",
   "files": [
+    "exports/",
     "dist/{css,js}/*.{css,js,map}",
     "js/{src,dist}/**/*.{js,map}",
     "scss/**/*.scss",
@@ -44,6 +50,7 @@
   ],
   "dependencies": {
     "bootstrap": "^5.3.6",
+    "react": "^19.1.0",
     "sass": "^1.57.1"
   },
   "devDependencies": {
