@@ -1,0 +1,1 @@
+export { default as PrimaryButton } from "../src/react-js/components/buttons/PrimaryButton";
