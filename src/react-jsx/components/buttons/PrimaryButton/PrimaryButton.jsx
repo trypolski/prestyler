@@ -1,14 +1,6 @@
 import React from "react";
-import { usePrestylerPrefix } from "../../../hooks/usePrestylerPrefix";
+import ButtonBaseComponent from "../ButtonBaseComponent/ButtonBaseComponent";
 
-export default function({ children, className = "", useBsClasses = true, ...rest }) {
-  const prefix = usePrestylerPrefix();
-  const bsClasses = `${prefix}btn ${prefix}btn-primary`;
-  const fullClassName = `${useBsClasses ? bsClasses : ''} ${className}`.trim();
-
-  return (
-    <button className={fullClassName} {...rest}>
-      {children}
-    </button>
-  );
+export default function(props) {
+  return <ButtonBaseComponent {...props} bsClasses={'btn btn-primary'} />;
 };
