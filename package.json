@@ -23,8 +23,11 @@
     "css:compile": "npm run css:compile-to-css & npm run css:compile-to-docs",
     "css:compile-to-css": "sass scss/prestyler.scss css/prestyler.css",
     "css:compile-to-docs": "sass scss/prestyler.scss docs/prestyler.css",
+    "build:bs": "sass src/styles/bootstrap/bootstrap.scss src/styles/bootstrap/bootstrap.css && postcss src/styles/bootstrap/bootstrap.css --config config/postcss.config.js --output src/styles/bootstrap/bootstrap-prefixed.css",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -63,6 +66,9 @@
   "devDependencies": {
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
+    "@storybook/addon-links": "^9.0.9",
+    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/react-webpack5": "^9.0.9",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "babel-jest": "^30.0.0",
@@ -79,8 +85,10 @@
     "postcss": "^8.5.4",
     "postcss-cli": "^11.0.1",
     "postcss-prefixer": "^3.0.0",
+    "prop-types": "^15.8.1",
     "sass-loader": "^13.2.0",
     "sass-true": "^6.1.0",
+    "storybook": "^9.0.9",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
