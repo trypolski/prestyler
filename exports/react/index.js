@@ -1,1 +1,12 @@
-export { default as PrimaryButton } from "../../src/react-js/components/buttons/PrimaryButton/PrimaryButton";
+export { 
+  Button,
+  PrimaryButton,
+  SecondaryButton,
+  SuccessButton,
+  DangerButton,
+  WarningButton,
+  InfoButton,
+  LightButton,
+  DarkButton,
+  LinkButton,
+} from "../../src/react-js/components/buttons/Buttons";

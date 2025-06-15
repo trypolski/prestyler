@@ -77,4 +77,16 @@ describe("Button", () => {
     expect(btn).toHaveAttribute("data-test", "foo");
     expect(btn).toHaveTextContent("Props");
   });
+
+  it('renders an <a> element with role "button" when isLink is true', () => {
+    render(
+      <Button isLink href="https://example.com">
+        Link Button
+      </Button>
+    );
+    const link = screen.getByRole("button", { name: /link button/i });
+    expect(link).toBeInTheDocument();
+    expect(link.tagName).toBe("A");
+    expect(link).toHaveAttribute("href", "https://example.com");
+  });
 });
