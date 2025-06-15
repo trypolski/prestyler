@@ -1,5 +1,5 @@
 import React from 'react';
-import { default as DefaultButton } from '../Button/Button';
+import { default as DefaultButton } from './Button/Button';
 
 export function Button(props) {
   return <DefaultButton variant="default" {...props} />;
