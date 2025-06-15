@@ -59,4 +59,16 @@ describe("ButtonBaseComponent", () => {
     const btn = screen.getByRole("button");
     expect(btn.className).toBe("");
   });
+
+  it("renders an <a> element when isLink prop is true", () => {
+    render(
+      <ButtonBaseComponent isLink href="https://example.com">
+        Link Button
+      </ButtonBaseComponent>
+    );
+    const link = screen.getByRole("button", { name: /link button/i });
+    expect(link).toBeInTheDocument();
+    expect(link.tagName).toBe("A");
+    expect(link).toHaveAttribute("href", "https://example.com");
+  });
 });

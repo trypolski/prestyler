@@ -8,7 +8,7 @@ const DEST_DIR = path.resolve(__dirname, "../src/react-js");
 
 const files = glob.sync("**/*.{js,jsx}", {
   cwd: SRC_DIR,
-  ignore: ["**/*.test.jsx", "**/*.spec.jsx"]
+  ignore: ["**/*.test.jsx", "**/*.spec.jsx", "**/*.stories.jsx"]
 });
 
 files.forEach(file => {
