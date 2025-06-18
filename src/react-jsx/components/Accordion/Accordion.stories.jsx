@@ -11,10 +11,14 @@ const Template = (args) => (
   <Accordion {...args}>
     <AccordionItem id="1" title="Accordion Item #1">
       <strong>This is the first item's content.</strong> You can put any HTML or React elements here.
-      <p>his is the first item's content.</p>
-      <p>his is the first item's content.</p>
-      <p>his is the first item's content.</p>
-      <p>his is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
+      <p>This is the first item's content.</p>
     </AccordionItem>
     <AccordionItem id="2" title="Accordion Item #2">
       <strong>This is the second item's content.</strong>
@@ -33,4 +37,10 @@ Default.args = {
 export const MultipleOpenAllowed = Template.bind({});
 MultipleOpenAllowed.args = {
   allowMultiple: true,
+};
+
+export const FirstItemOpened = Template.bind({});
+FirstItemOpened.args = {
+  allowMultiple: false,
+  defaultOpenItems: ['2'],
 };
