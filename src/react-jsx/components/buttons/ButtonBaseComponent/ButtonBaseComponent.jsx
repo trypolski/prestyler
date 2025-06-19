@@ -1,31 +1,39 @@
-import React from "react";
-import { usePrestylerPrefix } from "../../../hooks/usePrestylerPrefix";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
 
-export default function({ 
+export default function ButtonBaseComponent({
   children,
-  className = "",
+  className = '',
   useBsClasses = true,
   bsClasses = '',
   isLink = false,
   ...restProps
 }) {
   const prefix = usePrestylerPrefix();
-  const prefixedBsClasses = bsClasses 
+  const prefixedBsClasses = bsClasses
     ? bsClasses
         .split(' ')
-        .map(bsClass => `${prefix}${bsClass}`)
+        .map((bsClass) => `${prefix}${bsClass}`)
         .join(' ')
     : '';
   const fullClassName = `${useBsClasses ? prefixedBsClasses : ''} ${className}`.trim();
 
-  return isLink 
-    ? (
-      <a className={fullClassName} role="button" {...restProps}>
-        {children}
-      </a>
-    ) : (
-      <button className={fullClassName} {...restProps}>
-        {children}
-      </button>
-    );
+  return isLink ? (
+    <a className={fullClassName} role="button" {...restProps}>
+      {children}
+    </a>
+  ) : (
+    <button className={fullClassName} type="button" {...restProps}>
+      {children}
+    </button>
+  );
+}
+
+ButtonBaseComponent.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  useBsClasses: PropTypes.bool,
+  bsClasses: PropTypes.string,
+  isLink: PropTypes.bool,
 };
