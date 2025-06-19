@@ -1,0 +1,2 @@
+# In your .gitattributes file
+* text=auto eol=lf
