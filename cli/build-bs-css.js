@@ -5,6 +5,30 @@ const path = require("path");
 const fs = require("fs");
 const os = require("os");
 
+const defaultConfigPath = path.join(process.cwd(), "prestyler", "prestyler.config.json");
+const configExists = fs.existsSync(defaultConfigPath);
+
+if (configExists) {
+  log(`Using existing config at: ${defaultConfigPath}`);
+} else {
+  log(`No config found, will create at: ${defaultConfigPath}`);
+}
+
+function getPrefix() {
+  if (configExists) {
+    try {
+      const config = JSON.parse(fs.readFileSync(defaultConfigPath, "utf8"));
+      if (config && typeof config.prefix === "string") {
+        return config.prefix;
+      }
+    } catch (e) {
+      // Ignore parse errors and fallback to default
+    }
+  }
+  // Default prefix if config not found or invalid
+  return "bs-";
+}
+
 // -----------------------------
 // Helper functions
 // -----------------------------
@@ -27,7 +51,7 @@ function log(msg) {
 // Parse arguments
 // -----------------------------
 
-const prefix = parseArg("prefix", "bs-");
+const prefix = parseArg("prefix", getPrefix());
 const inputScss = parseArg("input", path.join(__dirname, "../src/styles/bootstrap/bootstrap.scss"));
 const outDir = parseArg("outDir", path.join(process.cwd(), "prestyler"));
 
@@ -95,12 +119,17 @@ try {
 // Write config file
 // -----------------------------
 
-const configPath = path.join(outDir, "prestyler.config.json");
-
 try {
   const configJson = { prefix };
-  fs.writeFileSync(configPath, JSON.stringify(configJson, null, 2), "utf8");
-  log(`Wrote prefix config to: ${configPath}`);
+  // If config does not exist, create it in prestyler directory
+  if (!fs.existsSync(defaultConfigPath)) {
+    const prestylerDir = path.dirname(defaultConfigPath);
+    if (!fs.existsSync(prestylerDir)) {
+      fs.mkdirSync(prestylerDir, { recursive: true });
+    }
+    fs.writeFileSync(defaultConfigPath, JSON.stringify(configJson, null, 2), "utf8");
+    log(`Created new prefix config at: ${prestylerDir}`);
+  }
 } catch (err) {
   fail(`Failed to write config file: ${err.message}`);
 }
