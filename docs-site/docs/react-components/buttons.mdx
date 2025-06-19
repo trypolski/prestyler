@@ -1,0 +1,110 @@
+---
+sidebar_position: 2
+---
+
+# Buttons
+
+The Prestyler Buttons components provide a set of styled button elements with flexible configuration. Each button type is a React component that wraps a base button and applies a Bootstrap-like style variant.
+
+## Button Types
+
+You can use the following button components:
+
+| Component         | Description                        |
+|-------------------|------------------------------------|
+| `Button`          | Default button                     |
+| `PrimaryButton`   | Primary action button              |
+| `SecondaryButton` | Secondary action button            |
+| `SuccessButton`   | Success state button               |
+| `DangerButton`    | Danger/error state button          |
+| `WarningButton`   | Warning state button               |
+| `InfoButton`      | Informational state button         |
+| `LightButton`     | Light background button            |
+| `DarkButton`      | Dark background button             |
+| `LinkButton`      | Styled as a link                   |
+
+**Example usage:**
+```jsx
+import {
+  Button,
+  PrimaryButton,
+  SecondaryButton,
+  SuccessButton,
+  DangerButton,
+  WarningButton,
+  InfoButton,
+  LightButton,
+  DarkButton,
+  LinkButton
+} from 'prestyler/react/jsx/';
+
+<PrimaryButton>Primary</PrimaryButton>
+<SecondaryButton isLarge>Large Secondary</SecondaryButton>
+<SuccessButton isSmall isOutlined>Small Outlined Success</SuccessButton>
+<LinkButton isLink href="https://example.com">Go to Example</LinkButton>
+```
+
+---
+
+## Props
+
+All button components accept the following props:
+
+| Prop           | Type      | Default   | Description                                                                                 |
+|----------------|-----------|-----------|---------------------------------------------------------------------------------------------|
+| `children`     | `node`    | —         | Content of the button.                                                                      |
+| `variant`      | `string`  | `"default"` (for `Button`) | Button style variant. Automatically set by each specific button component.                  |
+| `isLarge`      | `bool`    | `false`   | If `true`, applies large button size.                                                       |
+| `isSmall`      | `bool`    | `false`   | If `true`, applies small button size.                                                       |
+| `isOutlined`   | `bool`    | `false`   | If `true`, uses outlined style for the button.                                              |
+| `isLink`       | `bool`    | `false`   | If `true`, renders an `<a>` element instead of `<button>`.                                 |
+| `href`         | `string`  | —         | Used with `isLink`. The URL for the link.                                                   |
+| `className`    | `string`  | —         | Additional custom CSS classes.                                                              |
+| `useBsClasses` | `bool`    | `true`    | If `true`, applies Bootstrap-like classes with the configured prefix.                       |
+| `bsClasses`    | `string`  | —         | Bootstrap classes to apply. Usually set internally by the component.                        |
+| ...rest        |           |           | Any other props are passed to the underlying `<button>` or `<a>` element.                   |
+
+---
+
+## Examples
+
+### Primary Button
+```jsx
+<PrimaryButton>Primary</PrimaryButton>
+```
+
+### Large Outlined Danger Button
+
+```jsx
+<DangerButton isLarge isOutlined>Delete</DangerButton>
+```
+
+### Small Secondary Button
+
+```jsx
+<SecondaryButton isSmall>Small Secondary</SecondaryButton>
+```
+
+### Link Button
+
+```jsx
+<LinkButton isLink href="https://example.com">Go to Example</LinkButton>
+```
+
+### Custom Class and Props
+
+```jsx
+<SuccessButton className="my-custom-class" id="success-btn" onClick={handleClick}>
+  Custom Success
+</SuccessButton>
+```
+
+---
+
+## Notes
+
+- All buttons use a prefix for Bootstrap classes, which can be configured in your project.
+- The `isLink` prop renders an anchor (`<a>`) with `role="button"` for accessibility.
+- The `useBsClasses` prop allows you to disable Bootstrap-style classes if you want to use only your custom styles.
+
+---
