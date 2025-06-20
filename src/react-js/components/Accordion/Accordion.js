@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useMemo } from 'react';
+import React, { createContext, useState, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../hooks/usePrestylerPrefix';
 
