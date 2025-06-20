@@ -57,6 +57,8 @@ All button components accept the following props:
 | `isLarge`      | `bool`    | `false`   | If `true`, applies large button size.                                                       |
 | `isSmall`      | `bool`    | `false`   | If `true`, applies small button size.                                                       |
 | `isOutlined`   | `bool`    | `false`   | If `true`, uses outlined style for the button.                                              |
+| `isToggleable` | `bool`    | `false`   | If `true`, the button acts as a toggle button (adds `data-bs-toggle="button"` and `aria-pressed`). |
+| `isActive`     | `bool`    | `false`   | If `true` and `isToggleable` is also `true`, the button appears pressed/active.             |
 | `isLink`       | `bool`    | `false`   | If `true`, renders an `<a>` element instead of `<button>`.                                 |
 | `href`         | `string`  | —         | Used with `isLink`. The URL for the link.                                                   |
 | `className`    | `string`  | —         | Additional custom CSS classes.                                                              |
@@ -69,6 +71,7 @@ All button components accept the following props:
 ## Examples
 
 ### Primary Button
+
 ```jsx
 <PrimaryButton>Primary</PrimaryButton>
 ```
@@ -83,6 +86,25 @@ All button components accept the following props:
 
 ```jsx
 <SecondaryButton isSmall>Small Secondary</SecondaryButton>
+```
+
+### Toggleable Button
+
+```jsx
+import React, { useState } from 'react';
+
+export default function ToggleableExample() {
+  const [isActive, setIsActive] = useState(false);
+  return (
+    <PrimaryButton
+      isToggleable
+      isActive={isActive}
+      onClick={() => setIsActive((prev) => !prev)}
+    >
+      {isActive ? 'Active' : 'Inactive'}
+    </PrimaryButton>
+  );
+}
 ```
 
 ### Link Button
@@ -106,5 +128,4 @@ All button components accept the following props:
 - All buttons use a prefix for Bootstrap classes, which can be configured in your project.
 - The `isLink` prop renders an anchor (`<a>`) with `role="button"` for accessibility.
 - The `useBsClasses` prop allows you to disable Bootstrap-style classes if you want to use only your custom styles.
-
----
+- The `isToggleable` and `isActive` props allow you to create toggleable buttons that reflect an active/pressed state, similar to Bootstrap's toggle buttons.
