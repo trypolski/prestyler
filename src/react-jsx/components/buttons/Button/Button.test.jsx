@@ -109,4 +109,36 @@ describe('Button', () => {
     expect(link.tagName).toBe('A');
     expect(link).toHaveAttribute('href', 'https://example.com');
   });
+
+  it('adds data-bs-toggle and aria-pressed when isToggleable is true', () => {
+    render(
+      <Button isToggleable isActive={false}>
+        Toggleable
+      </Button>
+    );
+    const btn = getButton();
+    expect(btn).toHaveAttribute('data-bs-toggle', 'button');
+    expect(btn).toHaveAttribute('aria-pressed', 'false');
+    expect(btn.className.split(' ')).not.toContain(`${PREFIX}active`);
+  });
+
+  it('sets aria-pressed to true when isToggleable and isActive are true', () => {
+    render(
+      <Button isToggleable isActive>
+        Active Toggleable
+      </Button>
+    );
+    const btn = getButton();
+    expect(btn).toHaveAttribute('data-bs-toggle', 'button');
+    expect(btn).toHaveAttribute('aria-pressed', 'true');
+    expect(btn.className.split(' ')).toContain(`${PREFIX}active`);
+  });
+
+  it('does not add toggle attributes when isToggleable is false', () => {
+    render(<Button isActive>Not Toggleable</Button>);
+    const btn = getButton();
+    expect(btn).not.toHaveAttribute('data-bs-toggle');
+    expect(btn).not.toHaveAttribute('aria-pressed');
+    expect(btn.className.split(' ')).not.toContain(`${PREFIX}active`);
+  });
 });
