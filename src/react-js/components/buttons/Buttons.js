@@ -40,3 +40,7 @@ export function DarkButton(props) {
 export function LinkButton(props) {
   return <DefaultButton variant="link" {...props} />;
 }
+
+export function CloseButton(props) {
+  return <DefaultButton variant="close" {...props} />;
+}

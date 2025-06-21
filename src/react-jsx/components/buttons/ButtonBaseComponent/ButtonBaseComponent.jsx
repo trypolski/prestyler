@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
+import { getFullClassName } from '../../../utilities/utilities';
 
 export default function ButtonBaseComponent({
   children,
@@ -11,13 +12,7 @@ export default function ButtonBaseComponent({
   ...restProps
 }) {
   const prefix = usePrestylerPrefix();
-  const prefixedBsClasses = bsClasses
-    ? bsClasses
-        .split(' ')
-        .map((bsClass) => `${prefix}${bsClass}`)
-        .join(' ')
-    : '';
-  const fullClassName = `${useBsClasses ? prefixedBsClasses : ''} ${className}`.trim();
+  const fullClassName = getFullClassName(bsClasses, prefix, useBsClasses, className);
 
   return isLink ? (
     <a className={fullClassName} role="button" {...restProps}>
