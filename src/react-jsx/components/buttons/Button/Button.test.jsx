@@ -141,4 +141,36 @@ describe('Button', () => {
     expect(btn).not.toHaveAttribute('aria-pressed');
     expect(btn.className.split(' ')).not.toContain(`${PREFIX}active`);
   });
+
+  describe('Close button', () => {
+    it('has correct CSS classes and aria-label="Close" by default', () => {
+      render(<Button variant="close" />);
+      const btn = getButton();
+      expect(btn.className.split(' ')).toContain(`${PREFIX}btn`);
+      expect(btn.className.split(' ')).toContain(`${PREFIX}btn-close`);
+      expect(btn).toHaveAttribute('aria-label', 'Close');
+    });
+
+    it('does not render children', () => {
+      render(
+        <Button variant="close" aria-label="Dismiss">
+          Should not render
+        </Button>
+      );
+      const btn = getButton();
+      expect(btn).toHaveAttribute('aria-label', 'Dismiss');
+      expect(btn).toBeEmptyDOMElement();
+    });
+
+    it('always has isToggleable, isActive, isOutlined as false', () => {
+      render(<Button variant="close" isToggleable isActive isOutlined />);
+      const btn = getButton();
+      // Should not have toggle attributes or 'active' class
+      expect(btn).not.toHaveAttribute('data-bs-toggle');
+      expect(btn).not.toHaveAttribute('aria-pressed');
+      expect(btn.className.split(' ')).not.toContain('active');
+      // Should not have outlined class
+      expect(btn.className.split(' ')).not.toContain(`${PREFIX}btn-outline-close`);
+    });
+  });
 });

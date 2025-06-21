@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Buttons
@@ -22,6 +22,7 @@ You can use the following button components:
 | `LightButton`     | Light background button            |
 | `DarkButton`      | Dark background button             |
 | `LinkButton`      | Styled as a link                   |
+| `CloseButton`     | X style close button               |
 
 **Example usage:**
 ```jsx
@@ -35,13 +36,15 @@ import {
   InfoButton,
   LightButton,
   DarkButton,
-  LinkButton
+  LinkButton,
+  CloseButton
 } from 'prestyler/react/jsx/';
 
 <PrimaryButton>Primary</PrimaryButton>
 <SecondaryButton isLarge>Large Secondary</SecondaryButton>
 <SuccessButton isSmall isOutlined>Small Outlined Success</SuccessButton>
 <LinkButton isLink href="https://example.com">Go to Example</LinkButton>
+<CloseButton aria-label="Close" />
 ```
 
 ---
@@ -65,6 +68,11 @@ All button components accept the following props:
 | `useBsClasses` | `bool`    | `true`    | If `true`, applies Bootstrap-like classes with the configured prefix.                       |
 | `bsClasses`    | `string`  | —         | Bootstrap classes to apply. Usually set internally by the component.                        |
 | ...rest        |           |           | Any other props are passed to the underlying `<button>` or `<a>` element.                   |
+
+**Special notes for `CloseButton`:**
+- The `CloseButton` renders a Bootstrap-style close button.
+- It does **not** accept `children`, `isToggleable`, `isActive`, or `isOutlined` props (these are always ignored).
+- By default, it has `aria-label="Close"`, but you can override this with your own `aria-label` prop.
 
 ---
 
@@ -113,6 +121,13 @@ export default function ToggleableExample() {
 <LinkButton isLink href="https://example.com">Go to Example</LinkButton>
 ```
 
+### Close Button
+
+```jsx
+<CloseButton />
+<CloseButton aria-label="Dismiss" />
+```
+
 ### Custom Class and Props
 
 ```jsx
@@ -129,3 +144,4 @@ export default function ToggleableExample() {
 - The `isLink` prop renders an anchor (`<a>`) with `role="button"` for accessibility.
 - The `useBsClasses` prop allows you to disable Bootstrap-style classes if you want to use only your custom styles.
 - The `isToggleable` and `isActive` props allow you to create toggleable buttons that reflect an active/pressed state, similar to Bootstrap's toggle buttons.
+- The `CloseButton` is a specialized button for dismiss actions and always renders with the correct

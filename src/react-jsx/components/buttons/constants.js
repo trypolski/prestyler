@@ -9,6 +9,7 @@ export const BUTTON_CLASSES = {
   light: 'btn-light',
   dark: 'btn-dark',
   link: 'btn-link',
+  close: 'btn-close',
 };
 
 export const BUTTON_SIZES = {

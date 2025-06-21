@@ -16,15 +16,29 @@ export default function Button({
   if (variant !== 'default') {
     bsClasses.push(BUTTON_CLASSES[variant]);
   }
-  if (isOutlined) bsClasses = bsClasses.map((cls) => cls.replace('btn-', 'btn-outline-'));
+
+  const isCloseButton = variant === 'close';
   if (isLarge) bsClasses.push(BUTTON_SIZES.large);
   if (isSmall) bsClasses.push(BUTTON_SIZES.small);
-  if (isToggleable && isActive) bsClasses.push('active');
+  if (!isCloseButton) {
+    if (isOutlined) bsClasses = bsClasses.map((cls) => cls.replace('btn-', 'btn-outline-'));
+    if (isToggleable && isActive) bsClasses.push('active');
+  }
+
+  const closeButtonProps = isCloseButton
+    ? {
+        'aria-label': props['aria-label'] || 'Close',
+        children: null,
+      }
+    : {};
 
   return (
     <ButtonBaseComponent
       {...props}
-      {...(isToggleable ? { 'data-bs-toggle': 'button', 'aria-pressed': isActive } : {})}
+      {...(isToggleable && !isCloseButton
+        ? { 'data-bs-toggle': 'button', 'aria-pressed': isActive }
+        : {})}
+      {...closeButtonProps}
       bsClasses={bsClasses.join(' ')}
     />
   );
@@ -37,4 +51,5 @@ Button.propTypes = {
   isOutlined: PropTypes.bool,
   isToggleable: PropTypes.bool,
   isActive: PropTypes.bool,
+  'aria-label': PropTypes.string,
 };

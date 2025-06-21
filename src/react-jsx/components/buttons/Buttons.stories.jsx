@@ -10,6 +10,7 @@ import {
   LightButton,
   DarkButton,
   LinkButton,
+  CloseButton,
 } from './Buttons';
 
 export default {
@@ -18,8 +19,6 @@ export default {
 };
 
 export function AllButtons() {
-  const [isActive, setIsActive] = useState(false);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <div
@@ -38,6 +37,7 @@ export function AllButtons() {
         <DangerButton>Danger Button</DangerButton>
         <WarningButton>Warning Button</WarningButton>
         <InfoButton>Info Button</InfoButton>
+        <CloseButton />
       </div>
       <div
         style={{
@@ -56,77 +56,89 @@ export function AllButtons() {
         <SuccessButton isOutlined>Success Outlined Button</SuccessButton>
         <SecondaryButton disabled>Disabled Button</SecondaryButton>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
-          maxWidth: 200,
-          marginRight: '20px',
-        }}
+    </div>
+  );
+}
+
+export function LinkButtons() {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        maxWidth: 200,
+        marginRight: '20px',
+      }}
+    >
+      <Button isLink href="#">
+        Default Link
+      </Button>
+      <PrimaryButton isLink href="#">
+        Primary Link
+      </PrimaryButton>
+      <SecondaryButton isLink href="#">
+        Secondary Link
+      </SecondaryButton>
+      <SuccessButton isLink href="#">
+        Success Link
+      </SuccessButton>
+      <DangerButton isLink href="#">
+        Danger Link
+      </DangerButton>
+      <WarningButton isLink href="#">
+        Warning Link
+      </WarningButton>
+      <InfoButton isLink href="#">
+        Info Link
+      </InfoButton>
+      <LightButton isLink href="#">
+        Light Link
+      </LightButton>
+      <DarkButton isLink href="#">
+        Dark Link
+      </DarkButton>
+      <LinkButton isLink href="#">
+        Link
+      </LinkButton>
+      <DarkButton isLink isLarge href="#">
+        Large Dark Link
+      </DarkButton>
+      <SecondaryButton isLink isSmall href="#">
+        Small Secondary Link
+      </SecondaryButton>
+      <SuccessButton isLink isOutlined href="#">
+        Success Outlined Link
+      </SuccessButton>
+      <SecondaryButton isLink disabled href="#">
+        Disabled Link
+      </SecondaryButton>
+    </div>
+  );
+}
+
+export function ToggleableButtons() {
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: 200 }}>
+      <Button isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+        {isActive ? 'Default Button Active' : 'Default Button Inactive'}
+      </Button>
+      <DangerButton isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+        {isActive ? 'Danger Button Active' : 'Danger Button Inactive'}
+      </DangerButton>
+      <LinkButton isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+        {isActive ? 'Link Button Active' : 'Link Button Inactive'}
+      </LinkButton>
+      <SuccessButton
+        isOutlined
+        isToggleable
+        isActive={isActive}
+        onClick={() => setIsActive((prev) => !prev)}
       >
-        <Button isLink href="#">
-          Default Link
-        </Button>
-        <PrimaryButton isLink href="#">
-          Primary Link
-        </PrimaryButton>
-        <SecondaryButton isLink href="#">
-          Secondary Link
-        </SecondaryButton>
-        <SuccessButton isLink href="#">
-          Success Link
-        </SuccessButton>
-        <DangerButton isLink href="#">
-          Danger Link
-        </DangerButton>
-        <WarningButton isLink href="#">
-          Warning Link
-        </WarningButton>
-        <InfoButton isLink href="#">
-          Info Link
-        </InfoButton>
-        <LightButton isLink href="#">
-          Light Link
-        </LightButton>
-        <DarkButton isLink href="#">
-          Dark Link
-        </DarkButton>
-        <LinkButton isLink href="#">
-          Link
-        </LinkButton>
-        <DarkButton isLink isLarge href="#">
-          Large Dark Link
-        </DarkButton>
-        <SecondaryButton isLink isSmall href="#">
-          Small Secondary Link
-        </SecondaryButton>
-        <SuccessButton isLink isOutlined href="#">
-          Success Outlined Link
-        </SuccessButton>
-        <SecondaryButton isLink disabled href="#">
-          Disabled Link
-        </SecondaryButton>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: 200 }}>
-        <Button isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
-          {isActive ? 'Default Button Active' : 'Default Button Inactive'}
-        </Button>
-        <DangerButton isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
-          {isActive ? 'Danger Button Active' : 'Danger Button Inactive'}
-        </DangerButton>
-        <LinkButton isToggleable isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
-          {isActive ? 'Link Button Active' : 'Link Button Inactive'}
-        </LinkButton>
-        <SuccessButton
-          isOutlined
-          isToggleable
-          isActive={isActive}
-          onClick={() => setIsActive((prev) => !prev)}
-        >
-          {isActive ? 'Success Outlined Button Active' : 'Success Outlined Button Inactive'}
-        </SuccessButton>
-      </div>
+        {isActive ? 'Success Outlined Button Active' : 'Success Outlined Button Inactive'}
+      </SuccessButton>
     </div>
   );
 }
