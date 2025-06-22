@@ -23,3 +23,13 @@ export {
   AlertDark,
 } from '../../src/react-jsx/components/alerts/Alerts';
 export { default as AlertLink } from '../../src/react-jsx/components/alerts/AlertLink/AlertLink';
+export {
+  BadgePrimary,
+  BadgeSecondary,
+  BadgeSuccess,
+  BadgeDanger,
+  BadgeWarning,
+  BadgeInfo,
+  BadgeLight,
+  BadgeDark,
+} from '../../src/react-jsx/components/badges/Badges';
