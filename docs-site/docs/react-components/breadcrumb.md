@@ -43,8 +43,7 @@ The Prestyler Breadcrumb components provide accessible, customizable breadcrumb 
 ### Basic Breadcrumb
 
 ```jsx
-import Breadcrumb from 'prestyler/react/jsx';
-import BreadcrumbItem from 'prestyler/react/jsx';
+import { Breadcrumb, BreadcrumbItem } from 'prestyler/react/jsx';
 
 <Breadcrumb>
   <BreadcrumbItem url="/">Home</BreadcrumbItem>

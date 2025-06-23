@@ -52,8 +52,7 @@ The Prestyler Accordion components provide a flexible, accessible way to display
 ### Basic Accordion
 
 ```jsx
-import Accordion from 'prestyler/react/jsx/';
-import AccordionItem from 'prestyler/react/jsx/';
+import { Accordion, AccordionItem } from 'prestyler/react/jsx/';
 
 <Accordion>
   <AccordionItem id="item1" title="Section 1">
