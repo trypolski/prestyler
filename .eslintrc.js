@@ -15,5 +15,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off', // for React 17+
     'react/jsx-props-no-spreading': 'off', // Allow prop spreading
     'react/require-default-props': 'off', // Disable default props requirement
+    'react/forbid-prop-types': 'off', // Allow prop types like 'any', 'object', 'array', etc.
   },
 };

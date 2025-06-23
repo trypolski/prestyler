@@ -33,3 +33,5 @@ export {
   BadgeLight,
   BadgeDark,
 } from '../../src/react-js/components/badges/Badges';
+export { default as Breadcrumb } from '../../src/react-js/components/Breadcrumb/Breadcrumb';
+export { default as BreadcrumbItem } from '../../src/react-js/components/Breadcrumb/BreadcrumbItem';
