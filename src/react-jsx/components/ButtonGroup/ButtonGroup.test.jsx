@@ -19,7 +19,7 @@ describe('ButtonGroup', () => {
 
   it('renders with default BS style, prefixed btn-group class, custom className, and role="group"', () => {
     render(
-      <ButtonGroup className="custom-class">
+      <ButtonGroup className="custom-class" aria-label="Button group">
         <Button>Button</Button>
       </ButtonGroup>
     );
@@ -31,6 +31,7 @@ describe('ButtonGroup', () => {
     expect(div).not.toHaveClass(`${PREFIX}btn-group-lg`);
     expect(div).not.toHaveClass(`${PREFIX}btn-group-sm`);
     expect(screen.getByText('Button')).toBeInTheDocument();
+    expect(div).toHaveAttribute('aria-label', 'Button group');
   });
 
   it('applies only isLarge size class', () => {

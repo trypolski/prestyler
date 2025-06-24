@@ -36,3 +36,4 @@ export {
 export { default as Breadcrumb } from '../../src/react-js/components/Breadcrumb/Breadcrumb';
 export { default as BreadcrumbItem } from '../../src/react-js/components/Breadcrumb/BreadcrumbItem';
 export { default as ButtonGroup } from '../../src/react-js/components/ButtonGroup/ButtonGroup';
+export { default as ButtonToolbar } from '../../src/react-js/components/ButtonToolbar/ButtonToolbar';
