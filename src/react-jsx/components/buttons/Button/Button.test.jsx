@@ -3,23 +3,10 @@ import { render, screen } from '@testing-library/react';
 import Button from './Button';
 import { BUTTON_CLASSES, BUTTON_SIZES } from '../constants';
 
-const { usePrestylerPrefix } = require('../../../hooks/usePrestylerPrefix');
-
-const PREFIX = 'bs-';
-
 // Helper to get button element
 const getButton = () => screen.getByRole('button');
 
-// Mock the usePrestylerPrefix hook
-jest.mock('../../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
 describe('Button', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   it('renders children correctly', () => {
     render(<Button>Click me</Button>);
     expect(getButton()).toHaveTextContent('Click me');

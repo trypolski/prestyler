@@ -2,18 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ButtonBaseComponent from './ButtonBaseComponent';
 
-const { usePrestylerPrefix } = require('../../../hooks/usePrestylerPrefix');
-
-// Mock the usePrestylerPrefix hook
-jest.mock('../../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
 describe('ButtonBaseComponent', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue('pre-');
-  });
-
   it('renders children correctly', () => {
     render(<ButtonBaseComponent bsClasses="btn">Click me</ButtonBaseComponent>);
     expect(screen.getByRole('button')).toHaveTextContent('Click me');
@@ -21,8 +10,8 @@ describe('ButtonBaseComponent', () => {
 
   it('applies prefixed bsClasses when useBsClasses is true', () => {
     render(<ButtonBaseComponent bsClasses="btn btn-primary">Test</ButtonBaseComponent>);
-    expect(screen.getByRole('button')).toHaveClass('pre-btn');
-    expect(screen.getByRole('button')).toHaveClass('pre-btn-primary');
+    expect(screen.getByRole('button')).toHaveClass(`${PREFIX}btn`);
+    expect(screen.getByRole('button')).toHaveClass(`${PREFIX}btn-primary`);
   });
 
   it('does not apply prefixed bsClasses when useBsClasses is false', () => {
@@ -32,8 +21,8 @@ describe('ButtonBaseComponent', () => {
       </ButtonBaseComponent>
     );
     const btn = screen.getByRole('button');
-    expect(btn.className).not.toMatch(/pre-btn/);
-    expect(btn.className).not.toMatch(/pre-btn-primary/);
+    expect(btn.className).not.toMatch(new RegExp(`${PREFIX}btn`));
+    expect(btn.className).not.toMatch(new RegExp(`${PREFIX}btn-primary`));
   });
 
   it('appends additional className prop', () => {
@@ -44,7 +33,7 @@ describe('ButtonBaseComponent', () => {
     );
     const btn = screen.getByRole('button');
     expect(btn.className).toMatch(/extra-class/);
-    expect(btn.className).toMatch(/pre-btn/);
+    expect(btn.className).toMatch(new RegExp(`${PREFIX}btn`));
   });
 
   it('passes other props to the button', () => {
@@ -63,7 +52,7 @@ describe('ButtonBaseComponent', () => {
   it('handles empty bsClasses gracefully', () => {
     render(<ButtonBaseComponent bsClasses="">Test</ButtonBaseComponent>);
     const btn = screen.getByRole('button');
-    expect(btn.className).not.toMatch(/pre-/);
+    expect(btn.className).not.toMatch(new RegExp(`${PREFIX}`));
   });
 
   it('handles missing bsClasses prop gracefully', () => {

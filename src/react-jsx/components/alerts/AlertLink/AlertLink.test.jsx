@@ -2,19 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import AlertLink from './AlertLink';
 
-const { usePrestylerPrefix } = require('../../../hooks/usePrestylerPrefix');
-
-const PREFIX = 'bs-';
-
-jest.mock('../../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
 describe('AlertLink', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   it('renders children with correct href, bs and custom classes', () => {
     render(
       <AlertLink href="https://example.com" className="custom-class">

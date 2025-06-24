@@ -3,19 +3,7 @@ import { render, screen } from '@testing-library/react';
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbItem from './BreadcrumbItem';
 
-const { usePrestylerPrefix } = require('../../hooks/usePrestylerPrefix');
-
-jest.mock('../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
-const PREFIX = 'bs-';
-
 describe('Breadcrumb and BreadcrumbItem integration', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   it('renders nav with aria-label="Breadcrumb" by default, containing ol with prefixed breadcrumb class', () => {
     render(
       <Breadcrumb className="extra-class">

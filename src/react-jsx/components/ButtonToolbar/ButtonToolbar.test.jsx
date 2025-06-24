@@ -4,20 +4,7 @@ import ButtonToolbar from './ButtonToolbar';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import { Button } from '../buttons/Buttons';
 
-const { usePrestylerPrefix } = require('../../hooks/usePrestylerPrefix');
-
-// Mock only the usePrestylerPrefix hook to control the prefix
-jest.mock('../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
-const PREFIX = 'bs-';
-
 describe('ButtonToolbar', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   it('renders with default BS style, prefixed btn-toolbar class, custom className, and role="toolbar"', () => {
     render(
       <ButtonToolbar className="custom-toolbar" aria-label="Custom Toolbar">

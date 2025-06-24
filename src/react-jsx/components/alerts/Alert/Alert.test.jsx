@@ -4,19 +4,7 @@ import Alert from './Alert';
 import { ALERT_CLASSES } from '../constants';
 import AlertLink from '../AlertLink/AlertLink';
 
-const { usePrestylerPrefix } = require('../../../hooks/usePrestylerPrefix');
-
-const PREFIX = 'bs-';
-
-jest.mock('../../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
 describe('Alert', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   Object.entries(ALERT_CLASSES).forEach(([variant, bsClass]) => {
     it(`renders correct classes for variant="${variant}"`, () => {
       render(<Alert variant={variant}>Alert {variant}</Alert>);

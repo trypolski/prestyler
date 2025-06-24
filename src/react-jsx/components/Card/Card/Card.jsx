@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { usePrestylerClassBuilder } from '../../hooks/usePrestylerPrefix';
+import { usePrestylerClassBuilder } from '../../../hooks/usePrestylerPrefix';
 
-export default function ButtonToolbar(props) {
+export default function Card(props) {
   const { prestylerFullClassName, children, ...restProps } = usePrestylerClassBuilder(
-    'btn-toolbar',
+    'card',
     props
   );
+
   return (
-    <div {...restProps} role="toolbar" className={prestylerFullClassName}>
+    <div {...restProps} className={prestylerFullClassName}>
       {children}
     </div>
   );
 }
 
-ButtonToolbar.propTypes = {
+Card.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   useBsClasses: PropTypes.bool,
