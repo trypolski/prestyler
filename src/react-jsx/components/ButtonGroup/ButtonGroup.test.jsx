@@ -3,20 +3,7 @@ import { render, screen } from '@testing-library/react';
 import ButtonGroup from './ButtonGroup';
 import { Button } from '../buttons/Buttons'; // Assuming Button is the base button component
 
-const { usePrestylerPrefix } = require('../../hooks/usePrestylerPrefix');
-
-// Mock only the usePrestylerPrefix hook to control the prefix
-jest.mock('../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
-const PREFIX = 'bs-';
-
 describe('ButtonGroup', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   it('renders with default BS style, prefixed btn-group class, custom className, and role="group"', () => {
     render(
       <ButtonGroup className="custom-class" aria-label="Button group">

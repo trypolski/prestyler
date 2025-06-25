@@ -3,20 +3,7 @@ import { render, screen } from '@testing-library/react';
 import Badge from './Badge';
 import { BADGE_CLASSES } from '../constants';
 
-const { usePrestylerPrefix } = require('../../../hooks/usePrestylerPrefix');
-
-const PREFIX = 'bs-';
-
-// Mock the usePrestylerPrefix hook
-jest.mock('../../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: jest.fn(),
-}));
-
 describe('Badge', () => {
-  beforeEach(() => {
-    usePrestylerPrefix.mockReturnValue(PREFIX);
-  });
-
   Object.entries(BADGE_CLASSES).forEach(([variant, className]) => {
     it(`applies correct class for variant "${variant}"`, () => {
       render(<Badge variant={variant}>{variant}</Badge>);

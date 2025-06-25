@@ -3,13 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
 
-const PREFIX = 'bs-'; // Mock prefix for Bootstrap classes
-
-// Mock usePrestylerPrefix to always return "bs-"
-jest.mock('../../hooks/usePrestylerPrefix', () => ({
-  usePrestylerPrefix: () => PREFIX,
-}));
-
 describe('Accordion integration with AccordionItem', () => {
   it('allows only one open item when allowMultiple is false', async () => {
     render(

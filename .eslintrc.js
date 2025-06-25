@@ -17,4 +17,7 @@ module.exports = {
     'react/require-default-props': 'off', // Disable default props requirement
     'react/forbid-prop-types': 'off', // Allow prop types like 'any', 'object', 'array', etc.
   },
+  globals: {
+    PREFIX: 'readonly',
+  },
 };
