@@ -18,5 +18,6 @@ const config = {
     config.resolve.alias['prestyler-config'] = path.resolve(__dirname, '../prestyler/prestyler.config.js');
     return config;
   },
+  "staticDirs": ['../public'],
 };
 export default config;
