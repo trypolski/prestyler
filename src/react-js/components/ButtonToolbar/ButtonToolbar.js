@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { usePrestylerPrefix } from '../../hooks/usePrestylerPrefix';
-import { getFullClassName } from '../../utilities/utilities';
+import { usePrestylerClassBuilder } from '../../hooks/usePrestylerPrefix';
 
-export default function ButtonToolbar({ className, children, useBsClasses = true, ...props }) {
-  const prefix = usePrestylerPrefix();
-  const fullClassName = getFullClassName('btn-toolbar', prefix, useBsClasses, className);
-
+export default function ButtonToolbar(props) {
+  const { prestylerFullClassName, children, ...restProps } = usePrestylerClassBuilder(
+    'btn-toolbar',
+    props
+  );
   return (
-    <div {...props} role="toolbar" className={fullClassName}>
+    <div {...restProps} role="toolbar" className={prestylerFullClassName}>
       {children}
     </div>
   );
