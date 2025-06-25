@@ -38,6 +38,27 @@ export function FullCardExample() {
   );
 }
 
+export function CardImageBottomExample() {
+  return (
+    <Card style={{ width: 260 }}>
+      <CardHeader>Header: Header text</CardHeader>
+      <CardBody>
+        <CardTitle tag="h5">Card Title</CardTitle>
+        <CardSubtitle tag="h6" className="mb-2 text-muted">
+          Card Subtitle
+        </CardSubtitle>
+        <CardText>
+          Some quick example text to build on the card title and make up the bulk of the card&apos;s
+          content.
+        </CardText>
+        <CardLink href="#">Card Link</CardLink>
+        <CardLink href="#">Another Link</CardLink>
+      </CardBody>
+      <CardImage src="/card-image-placeholder.png" alt="Card image" isBottom />
+    </Card>
+  );
+}
+
 export function CardWithImageOverlay() {
   return (
     <Card className="bg-dark text-white" style={{ width: 320 }}>
