@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 
 const CarouselContext = createContext();
 
+const DIRECTIONS = {
+  FORWARD: 'FORWARD',
+  BACK: 'BACK',
+};
+
 export default function Carousel({
   children,
-  interval = 5000,
+  interval = 2000,
   controls = true,
   indicators = true,
   fade = false,
@@ -14,8 +19,12 @@ export default function Carousel({
   className = '',
   ...props
 }) {
-  const [indexes, setIndexes] = useState({ prevIndex: null, activeIndex: 0 });
-  const { activeIndex } = indexes;
+  const [slidesData, setSlidesData] = useState({
+    prevIndex: null,
+    activeIndex: 0,
+    direction: DIRECTIONS.FORWARD,
+  });
+  const { activeIndex, prevIndex, direction } = slidesData;
   const count = React.Children.count(children);
   const timerRef = useRef();
 
@@ -23,14 +32,15 @@ export default function Carousel({
   useEffect(() => {
     if (interval && count > 1) {
       timerRef.current = setInterval(() => {
-        setIndexes({
+        setSlidesData({
+          direction: DIRECTIONS.FORWARD,
           prevIndex: activeIndex,
           activeIndex: (activeIndex + 1) % count,
         });
       }, interval);
       return () => clearInterval(timerRef.current);
     }
-  }, [interval, count]);
+  }, [interval, count, activeIndex]);
 
   // Pause on hover
   const handleMouseEnter = () => {
@@ -39,7 +49,8 @@ export default function Carousel({
   const handleMouseLeave = () => {
     if (pause === 'hover' && interval && count > 1) {
       timerRef.current = setInterval(() => {
-        setIndexes({
+        setSlidesData({
+          direction: DIRECTIONS.FORWARD,
           prevIndex: activeIndex,
           activeIndex: (activeIndex + 1) % count,
         });
@@ -48,14 +59,16 @@ export default function Carousel({
   };
 
   // Navigation
-  const goTo = (idx) => setIndexes({ prevIndex: activeIndex, activeIndex: idx });
+  const goTo = (idx) => setSlidesData({ prevIndex: activeIndex, activeIndex: idx });
   const handlePrev = () =>
-    setIndexes({
+    setSlidesData({
+      direction: DIRECTIONS.BACK,
       prevIndex: activeIndex,
       activeIndex: activeIndex === 0 ? (wrap ? count - 1 : 0) : activeIndex - 1,
     });
   const handleNext = () =>
-    setIndexes({
+    setSlidesData({
+      direction: DIRECTIONS.FORWARD,
       prevIndex: activeIndex,
       activeIndex: activeIndex === count - 1 ? (wrap ? 0 : activeIndex) : activeIndex + 1,
     });
@@ -63,11 +76,12 @@ export default function Carousel({
   const contextValue = useMemo(
     () => ({
       activeIndex,
-      prevIndex: indexes.prevIndex,
+      prevIndex,
+      direction,
     }),
-    [activeIndex]
+    [activeIndex, prevIndex, direction]
   );
-
+  console.log('Slides Data:', slidesData);
   return (
     <CarouselContext.Provider value={contextValue}>
       <div
@@ -81,6 +95,7 @@ export default function Carousel({
             {React.Children.map(children, (_, idx) => (
               <button
                 type="button"
+                data-bs-target="#carouselExampleIndicators"
                 className={idx === activeIndex ? 'bs-active' : ''}
                 aria-current={idx === activeIndex}
                 aria-label={`Slide ${idx + 1}`}
