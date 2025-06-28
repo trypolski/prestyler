@@ -1,12 +1,9 @@
 import React, { createContext, useContext, useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
+import { DIRECTIONS } from '../constants';
 
 const CarouselContext = createContext();
-
-const DIRECTIONS = {
-  FORWARD: 'FORWARD',
-  BACK: 'BACK',
-};
 
 export default function Carousel({
   children,
@@ -19,6 +16,7 @@ export default function Carousel({
   className = '',
   ...props
 }) {
+  const prefix = usePrestylerPrefix();
   const [slidesData, setSlidesData] = useState({
     prevIndex: null,
     activeIndex: 0,
@@ -26,36 +24,30 @@ export default function Carousel({
   });
   const { activeIndex, prevIndex, direction } = slidesData;
   const count = React.Children.count(children);
-  const timerRef = useRef();
+  const isPaused = useRef(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Auto-slide logic
+  // Set up interval once on mount
   useEffect(() => {
-    if (interval && count > 1) {
-      timerRef.current = setInterval(() => {
-        setSlidesData({
+    if (!interval || count <= 1) return;
+    const timer = setInterval(() => {
+      if (!isPaused.current) {
+        setSlidesData((prev) => ({
           direction: DIRECTIONS.FORWARD,
-          prevIndex: activeIndex,
-          activeIndex: (activeIndex + 1) % count,
-        });
-      }, interval);
-      return () => clearInterval(timerRef.current);
-    }
-  }, [interval, count, activeIndex]);
+          prevIndex: prev.activeIndex,
+          activeIndex: prev.activeIndex + 1 >= count ? 0 : prev.activeIndex + 1,
+        }));
+      }
+    }, interval);
+    return () => clearInterval(timer);
+  }, [interval, count]);
 
   // Pause on hover
   const handleMouseEnter = () => {
-    if (pause === 'hover') clearInterval(timerRef.current);
+    if (pause === 'hover') isPaused.current = true;
   };
   const handleMouseLeave = () => {
-    if (pause === 'hover' && interval && count > 1) {
-      timerRef.current = setInterval(() => {
-        setSlidesData({
-          direction: DIRECTIONS.FORWARD,
-          prevIndex: activeIndex,
-          activeIndex: (activeIndex + 1) % count,
-        });
-      }, interval);
-    }
+    if (pause === 'hover') isPaused.current = false;
   };
 
   // Navigation
@@ -64,13 +56,13 @@ export default function Carousel({
     setSlidesData({
       direction: DIRECTIONS.BACK,
       prevIndex: activeIndex,
-      activeIndex: activeIndex === 0 ? (wrap ? count - 1 : 0) : activeIndex - 1,
+      activeIndex: activeIndex - 1 < 0 ? count - 1 : activeIndex - 1,
     });
   const handleNext = () =>
     setSlidesData({
       direction: DIRECTIONS.FORWARD,
       prevIndex: activeIndex,
-      activeIndex: activeIndex === count - 1 ? (wrap ? 0 : activeIndex) : activeIndex + 1,
+      activeIndex: activeIndex + 1 >= count ? 0 : activeIndex + 1,
     });
 
   const contextValue = useMemo(
@@ -78,25 +70,26 @@ export default function Carousel({
       activeIndex,
       prevIndex,
       direction,
+      setIsTransitioning,
     }),
     [activeIndex, prevIndex, direction]
   );
-  console.log('Slides Data:', slidesData);
+
   return (
     <CarouselContext.Provider value={contextValue}>
       <div
-        className={`bs-carousel bs-slide${fade ? ' bs-carousel-fade' : ''} ${className}`}
+        className={`${prefix}carousel ${prefix}slide ${fade ? `${prefix}carousel-fade` : ''} ${className}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         {...props}
       >
         {indicators && (
-          <div className="bs-carousel-indicators">
+          <div className={`${prefix}carousel-indicators`}>
             {React.Children.map(children, (_, idx) => (
               <button
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
-                className={idx === activeIndex ? 'bs-active' : ''}
+                className={idx === activeIndex ? `${prefix}active` : ''}
                 aria-current={idx === activeIndex}
                 aria-label={`Slide ${idx + 1}`}
                 onClick={() => goTo(idx)}
@@ -105,25 +98,27 @@ export default function Carousel({
           </div>
         )}
 
-        <div className="bs-carousel-inner">{children}</div>
+        <div className={`${prefix}carousel-inner`}>{children}</div>
 
         {controls && count > 1 && (
           <>
             <button
               type="button"
-              className="bs-carousel-control-prev"
+              className={`${prefix}carousel-control-prev`}
               onClick={handlePrev}
               aria-label="Previous"
+              disabled={isTransitioning}
             >
-              <span className="bs-carousel-control-prev-icon" aria-hidden="true" />
+              <span className={`${prefix}carousel-control-prev-icon`} aria-hidden="true" />
             </button>
             <button
               type="button"
-              className="bs-carousel-control-next"
+              className={`${prefix}carousel-control-next`}
               onClick={handleNext}
               aria-label="Next"
+              disabled={isTransitioning}
             >
-              <span className="bs-carousel-control-next-icon" aria-hidden="true" />
+              <span className={`${prefix}carousel-control-next-icon`} aria-hidden="true" />
             </button>
           </>
         )}

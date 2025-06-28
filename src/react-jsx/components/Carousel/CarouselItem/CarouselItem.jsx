@@ -5,7 +5,7 @@ import { useCarousel } from '../Carousel/Carousel';
 
 export default function CarouselItem({ itemIndex, children, className = '', ...props }) {
   const prefix = usePrestylerPrefix();
-  const { activeIndex, prevIndex, direction } = useCarousel();
+  const { activeIndex, prevIndex, direction, setIsTransitioning } = useCarousel();
   const carouselItemRef = useRef(null);
   const [init, setInit] = useState(true);
   const isActive = itemIndex === activeIndex;
@@ -49,6 +49,7 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
           );
         }
         carouselItemEl.classList.add(`${prefix}active`);
+        setIsTransitioning(false);
       }
       carouselItemEl.removeEventListener('transitionend', transitionEndListener);
     }
@@ -61,13 +62,14 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
       }
     }
     if (isActive) {
+      setIsTransitioning(true);
       if (direction === 'FORWARD') {
         carouselItemEl.classList.add(`${prefix}carousel-item-next`);
-        carouselItemEl.offsetHeight;
+        carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
         carouselItemEl.classList.add(`${prefix}carousel-item-start`);
       } else {
         carouselItemEl.classList.add(`${prefix}carousel-item-prev`);
-        carouselItemEl.offsetHeight;
+        carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
         carouselItemEl.classList.add(`${prefix}carousel-item-end`);
       }
     }
