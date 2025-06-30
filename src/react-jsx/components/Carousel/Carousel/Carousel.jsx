@@ -11,59 +11,66 @@ export default function Carousel({
   controls = true,
   indicators = true,
   fade = false,
-  wrap = true,
-  pause = 'hover',
+  pauseOnHover = true,
   className = '',
+  defaultDirection = DIRECTIONS.FORWARD,
   ...props
 }) {
   const prefix = usePrestylerPrefix();
+  const [childrenData, setChildrenData] = useState({ childrenProps: [], childrenCount: 0 });
   const [slidesData, setSlidesData] = useState({
     prevIndex: null,
     activeIndex: 0,
     direction: DIRECTIONS.FORWARD,
   });
+  const { childrenCount, childrenProps } = childrenData;
   const { activeIndex, prevIndex, direction } = slidesData;
-  const count = React.Children.count(children);
   const isPaused = useRef(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Set up interval once on mount
   useEffect(() => {
-    if (!interval || count <= 1) return;
+    setChildrenData({
+      childrenProps: React.Children.map(children, (childrenElement) => {
+        if (!React.isValidElement(childrenElement)) return {};
+        return childrenElement.props;
+      }),
+      childrenCount: React.Children.count(children),
+    });
+  }, [children]);
+
+  function setSlide(moveBack, moveToIndex) {
+    if (moveToIndex === activeIndex) return;
+    let nextDirection = defaultDirection;
+    let nextActiveIndex = (activeIndex + 1) % childrenCount;
+    if (moveBack) {
+      nextDirection =
+        defaultDirection === DIRECTIONS.FORWARD ? DIRECTIONS.BACK : DIRECTIONS.FORWARD;
+      nextActiveIndex = activeIndex === 0 ? childrenCount - 1 : activeIndex - 1;
+    }
+    if (moveToIndex !== undefined) {
+      nextDirection = moveToIndex < activeIndex ? DIRECTIONS.BACK : DIRECTIONS.FORWARD;
+      nextActiveIndex = moveToIndex;
+    }
+    setSlidesData({
+      direction: nextDirection,
+      prevIndex: activeIndex,
+      activeIndex: nextActiveIndex,
+    });
+  }
+
+  useEffect(() => {
+    if (!interval || childrenCount <= 1) return;
     const timer = setInterval(() => {
       if (!isPaused.current) {
-        setSlidesData((prev) => ({
-          direction: DIRECTIONS.FORWARD,
-          prevIndex: prev.activeIndex,
-          activeIndex: prev.activeIndex + 1 >= count ? 0 : prev.activeIndex + 1,
-        }));
+        setSlide();
       }
     }, interval);
-    return () => clearInterval(timer);
-  }, [interval, count]);
+    return () => clearInterval(timer); // eslint-disable-line consistent-return
+  }, [interval, childrenCount, activeIndex]);
 
-  // Pause on hover
-  const handleMouseEnter = () => {
-    if (pause === 'hover') isPaused.current = true;
-  };
-  const handleMouseLeave = () => {
-    if (pause === 'hover') isPaused.current = false;
-  };
-
-  // Navigation
-  const goTo = (idx) => setSlidesData({ prevIndex: activeIndex, activeIndex: idx });
-  const handlePrev = () =>
-    setSlidesData({
-      direction: DIRECTIONS.BACK,
-      prevIndex: activeIndex,
-      activeIndex: activeIndex - 1 < 0 ? count - 1 : activeIndex - 1,
-    });
-  const handleNext = () =>
-    setSlidesData({
-      direction: DIRECTIONS.FORWARD,
-      prevIndex: activeIndex,
-      activeIndex: activeIndex + 1 >= count ? 0 : activeIndex + 1,
-    });
+  function handleMouseHover(isHovered) {
+    if (pauseOnHover) isPaused.current = isHovered;
+  }
 
   const contextValue = useMemo(
     () => ({
@@ -79,33 +86,39 @@ export default function Carousel({
     <CarouselContext.Provider value={contextValue}>
       <div
         className={`${prefix}carousel ${prefix}slide ${fade ? `${prefix}carousel-fade` : ''} ${className}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => handleMouseHover(true)}
+        onMouseLeave={() => handleMouseHover(false)}
         {...props}
       >
-        {indicators && (
+        {indicators && childrenCount > 0 && (
           <div className={`${prefix}carousel-indicators`}>
-            {React.Children.map(children, (_, idx) => (
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                className={idx === activeIndex ? `${prefix}active` : ''}
-                aria-current={idx === activeIndex}
-                aria-label={`Slide ${idx + 1}`}
-                onClick={() => goTo(idx)}
-              />
-            ))}
+            {React.Children.map(children, (_, idx) => {
+              const childrenProp = childrenProps[idx];
+              const ariaLabel = childrenProp['aria-label'] || `Slide ${idx + 1}`;
+              const isActiveIndicator = idx === activeIndex;
+              return (
+                <button
+                  type="button"
+                  className={isActiveIndicator ? `${prefix}active` : ''}
+                  data-bs-target="#carouselExampleIndicators"
+                  aria-current={isActiveIndicator}
+                  aria-label={ariaLabel}
+                  onClick={() => setSlide(false, idx)}
+                  disabled={isTransitioning}
+                />
+              );
+            })}
           </div>
         )}
 
         <div className={`${prefix}carousel-inner`}>{children}</div>
 
-        {controls && count > 1 && (
+        {controls && childrenCount > 1 && (
           <>
             <button
               type="button"
               className={`${prefix}carousel-control-prev`}
-              onClick={handlePrev}
+              onClick={() => setSlide(true)}
               aria-label="Previous"
               disabled={isTransitioning}
             >
@@ -114,7 +127,7 @@ export default function Carousel({
             <button
               type="button"
               className={`${prefix}carousel-control-next`}
-              onClick={handleNext}
+              onClick={() => setSlide()}
               aria-label="Next"
               disabled={isTransitioning}
             >
@@ -134,8 +147,9 @@ Carousel.propTypes = {
   indicators: PropTypes.bool,
   fade: PropTypes.bool,
   wrap: PropTypes.bool,
-  pause: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['hover'])]),
+  pauseOnHover: PropTypes.bool,
   className: PropTypes.string,
+  defaultDirection: PropTypes.oneOf(Object.values(DIRECTIONS)),
 };
 
 export const useCarousel = () => useContext(CarouselContext);
