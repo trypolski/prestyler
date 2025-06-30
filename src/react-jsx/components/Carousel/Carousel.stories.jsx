@@ -10,7 +10,7 @@ export default {
 export function BasicCarousel() {
   return (
     <Carousel interval={3000} controls indicators fade={false} style={{ maxWidth: 600 }}>
-      <CarouselItem itemIndex={0}>
+      <CarouselItem itemIndex={0} aria-label="First slide">
         <img
           src="/slide-1.png"
           className="d-block w-100"
