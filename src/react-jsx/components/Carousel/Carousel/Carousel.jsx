@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
-import { DIRECTIONS } from '../constants';
+import { DIRECTIONS, TRANSITION_TYPES } from '../constants';
 
 const CarouselContext = createContext();
 
@@ -78,8 +78,9 @@ export default function Carousel({
       prevIndex,
       direction,
       setIsTransitioning,
+      transitionType: fade ? TRANSITION_TYPES.FADE : TRANSITION_TYPES.MOVE,
     }),
-    [activeIndex, prevIndex, direction]
+    [activeIndex, prevIndex, direction, fade]
   );
 
   return (
