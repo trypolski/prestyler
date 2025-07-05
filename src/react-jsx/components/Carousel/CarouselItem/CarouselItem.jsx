@@ -2,14 +2,16 @@ import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
 import { useCarousel } from '../Carousel/Carousel';
+import { TRANSITION_CLASSNAMES } from '../constants';
 
 export default function CarouselItem({ itemIndex, children, className = '', ...props }) {
   const prefix = usePrestylerPrefix();
-  const { activeIndex, prevIndex, direction, setIsTransitioning } = useCarousel();
+  const { activeIndex, prevIndex, direction, setIsTransitioning, transitionType } = useCarousel();
   const carouselItemRef = useRef(null);
   const [init, setInit] = useState(true);
   const isActive = itemIndex === activeIndex;
   const isPrev = itemIndex === prevIndex;
+  const transitionClasses = TRANSITION_CLASSNAMES[transitionType];
 
   useEffect(() => {
     const carouselItemEl = carouselItemRef.current;
@@ -18,7 +20,7 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
 
     if (init) {
       if (isActive) {
-        carouselItemEl.classList.add(`${prefix}active`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
       }
       setInit(false);
       return;
@@ -31,24 +33,24 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     function transitionEndListener() {
       if (isPrev) {
         if (direction === 'FORWARD') {
-          carouselItemEl.classList.remove(`${prefix}carousel-item-start`);
+          carouselItemEl.classList.remove(`${prefix}${transitionClasses.START}`);
         } else {
-          carouselItemEl.classList.remove(`${prefix}carousel-item-end`);
+          carouselItemEl.classList.remove(`${prefix}${transitionClasses.END}`);
         }
-        carouselItemEl.classList.remove(`${prefix}active`);
+        carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
       } else {
         if (direction === 'FORWARD') {
           carouselItemEl.classList.remove(
-            `${prefix}carousel-item-next`,
-            `${prefix}carousel-item-start`
+            `${prefix}${transitionClasses.NEXT}`,
+            `${prefix}${transitionClasses.START}`
           );
         } else {
           carouselItemEl.classList.remove(
-            `${prefix}carousel-item-prev`,
-            `${prefix}carousel-item-end`
+            `${prefix}${transitionClasses.PREV}`,
+            `${prefix}${transitionClasses.END}`
           );
         }
-        carouselItemEl.classList.add(`${prefix}active`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
         setIsTransitioning(false);
       }
       carouselItemEl.removeEventListener('transitionend', transitionEndListener);
@@ -56,21 +58,21 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     carouselItemEl.addEventListener('transitionend', transitionEndListener);
     if (isPrev) {
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}carousel-item-start`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.START}`);
       } else {
-        carouselItemEl.classList.add(`${prefix}carousel-item-end`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.END}`);
       }
     }
     if (isActive) {
       setIsTransitioning(true);
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}carousel-item-next`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.NEXT}`);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}carousel-item-start`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.START}`);
       } else {
-        carouselItemEl.classList.add(`${prefix}carousel-item-prev`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.PREV}`);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}carousel-item-end`);
+        carouselItemEl.classList.add(`${prefix}${transitionClasses.END}`);
       }
     }
   }, [isActive, isPrev]);
