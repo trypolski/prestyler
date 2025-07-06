@@ -6,12 +6,11 @@ import { TRANSITION_CLASSNAMES } from '../constants';
 
 export default function CarouselItem({ itemIndex, children, className = '', ...props }) {
   const prefix = usePrestylerPrefix();
-  const { activeIndex, prevIndex, direction, setIsTransitioning, transitionType } = useCarousel();
+  const { activeIndex, prevIndex, direction, setIsTransitioning } = useCarousel();
   const carouselItemRef = useRef(null);
   const [init, setInit] = useState(true);
   const isActive = itemIndex === activeIndex;
   const isPrev = itemIndex === prevIndex;
-  const transitionClasses = TRANSITION_CLASSNAMES[transitionType];
 
   useEffect(() => {
     const carouselItemEl = carouselItemRef.current;
@@ -33,21 +32,21 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     function transitionEndListener() {
       if (isPrev) {
         if (direction === 'FORWARD') {
-          carouselItemEl.classList.remove(`${prefix}${transitionClasses.START}`);
+          carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.START}`);
         } else {
-          carouselItemEl.classList.remove(`${prefix}${transitionClasses.END}`);
+          carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.END}`);
         }
         carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
       } else {
         if (direction === 'FORWARD') {
           carouselItemEl.classList.remove(
-            `${prefix}${transitionClasses.NEXT}`,
-            `${prefix}${transitionClasses.START}`
+            `${prefix}${TRANSITION_CLASSNAMES.NEXT}`,
+            `${prefix}${TRANSITION_CLASSNAMES.START}`
           );
         } else {
           carouselItemEl.classList.remove(
-            `${prefix}${transitionClasses.PREV}`,
-            `${prefix}${transitionClasses.END}`
+            `${prefix}${TRANSITION_CLASSNAMES.PREV}`,
+            `${prefix}${TRANSITION_CLASSNAMES.END}`
           );
         }
         carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
@@ -58,21 +57,21 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     carouselItemEl.addEventListener('transitionend', transitionEndListener);
     if (isPrev) {
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.START}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.START}`);
       } else {
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.END}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.END}`);
       }
     }
     if (isActive) {
       setIsTransitioning(true);
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.NEXT}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.NEXT}`);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.START}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.START}`);
       } else {
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.PREV}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.PREV}`);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}${transitionClasses.END}`);
+        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.END}`);
       }
     }
   }, [isActive, isPrev]);

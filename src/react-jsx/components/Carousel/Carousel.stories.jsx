@@ -5,11 +5,33 @@ import CarouselItem from './CarouselItem/CarouselItem';
 export default {
   title: 'Components/Carousel',
   component: Carousel,
+  argTypes: {
+    interval: {
+      control: { type: 'number', min: 0, step: 500 },
+      defaultValue: 3000,
+      description: 'Interval between slides in ms (0 disables auto sliding)',
+    },
+    controls: {
+      control: 'boolean',
+      defaultValue: true,
+      description: 'Show previous/next controls',
+    },
+    indicators: {
+      control: 'boolean',
+      defaultValue: true,
+      description: 'Show slide indicators',
+    },
+    fade: {
+      control: 'boolean',
+      defaultValue: false,
+      description: 'Use fade transition',
+    },
+  },
 };
 
-export function BasicCarousel() {
+export function BasicCarousel(args) {
   return (
-    <Carousel interval={3000} controls indicators fade={false} style={{ maxWidth: 600 }}>
+    <Carousel {...args} style={{ maxWidth: 600 }}>
       <CarouselItem itemIndex={0} aria-label="First slide">
         <img
           src="/slide-1.png"
@@ -37,3 +59,9 @@ export function BasicCarousel() {
     </Carousel>
   );
 }
+BasicCarousel.args = {
+  interval: 2000,
+  controls: true,
+  indicators: true,
+  fade: false,
+};
