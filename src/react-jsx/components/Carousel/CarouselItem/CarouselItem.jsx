@@ -1,16 +1,29 @@
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
+import { getFullClassName } from '../../../utilities/utilities';
 import { useCarousel } from '../Carousel/Carousel';
 import { TRANSITION_CLASSNAMES } from '../constants';
 
-export default function CarouselItem({ itemIndex, children, className = '', ...props }) {
+export default function CarouselItem({
+  itemIndex,
+  children,
+  className = '',
+  useBsClasses = true,
+  ...props
+}) {
   const prefix = usePrestylerPrefix();
   const { activeIndex, prevIndex, direction, setIsTransitioning } = useCarousel();
   const carouselItemRef = useRef(null);
   const [init, setInit] = useState(true);
   const isActive = itemIndex === activeIndex;
   const isPrev = itemIndex === prevIndex;
+
+  const activeClassName = getFullClassName(TRANSITION_CLASSNAMES.ACTIVE, prefix, useBsClasses);
+  const startClassName = getFullClassName(TRANSITION_CLASSNAMES.START, prefix, useBsClasses);
+  const endClassName = getFullClassName(TRANSITION_CLASSNAMES.END, prefix, useBsClasses);
+  const nextClassName = getFullClassName(TRANSITION_CLASSNAMES.NEXT, prefix, useBsClasses);
+  const prevClassName = getFullClassName(TRANSITION_CLASSNAMES.PREV, prefix, useBsClasses);
 
   useEffect(() => {
     const carouselItemEl = carouselItemRef.current;
@@ -19,7 +32,7 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
 
     if (init) {
       if (isActive) {
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
+        carouselItemEl.classList.add(activeClassName);
       }
       setInit(false);
       return;
@@ -32,24 +45,18 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     function transitionEndListener() {
       if (isPrev) {
         if (direction === 'FORWARD') {
-          carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.START}`);
+          carouselItemEl.classList.remove(startClassName);
         } else {
-          carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.END}`);
+          carouselItemEl.classList.remove(endClassName);
         }
-        carouselItemEl.classList.remove(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
+        carouselItemEl.classList.remove(activeClassName);
       } else {
         if (direction === 'FORWARD') {
-          carouselItemEl.classList.remove(
-            `${prefix}${TRANSITION_CLASSNAMES.NEXT}`,
-            `${prefix}${TRANSITION_CLASSNAMES.START}`
-          );
+          carouselItemEl.classList.remove(nextClassName, startClassName);
         } else {
-          carouselItemEl.classList.remove(
-            `${prefix}${TRANSITION_CLASSNAMES.PREV}`,
-            `${prefix}${TRANSITION_CLASSNAMES.END}`
-          );
+          carouselItemEl.classList.remove(prevClassName, endClassName);
         }
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.ACTIVE}`);
+        carouselItemEl.classList.add(activeClassName);
         setIsTransitioning(false);
       }
       carouselItemEl.removeEventListener('transitionend', transitionEndListener);
@@ -57,27 +64,31 @@ export default function CarouselItem({ itemIndex, children, className = '', ...p
     carouselItemEl.addEventListener('transitionend', transitionEndListener);
     if (isPrev) {
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.START}`);
+        carouselItemEl.classList.add(startClassName);
       } else {
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.END}`);
+        carouselItemEl.classList.add(endClassName);
       }
     }
     if (isActive) {
       setIsTransitioning(true);
       if (direction === 'FORWARD') {
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.NEXT}`);
+        carouselItemEl.classList.add(nextClassName);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.START}`);
+        carouselItemEl.classList.add(startClassName);
       } else {
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.PREV}`);
+        carouselItemEl.classList.add(prevClassName);
         carouselItemEl.offsetHeight; // eslint-disable-line no-unused-expressions
-        carouselItemEl.classList.add(`${prefix}${TRANSITION_CLASSNAMES.END}`);
+        carouselItemEl.classList.add(endClassName);
       }
     }
   }, [isActive, isPrev]);
 
   return (
-    <div ref={carouselItemRef} className={`${prefix}carousel-item ${className}`} {...props}>
+    <div
+      ref={carouselItemRef}
+      {...props}
+      className={getFullClassName('carousel-item', prefix, useBsClasses, className)}
+    >
       {children}
     </div>
   );
@@ -87,4 +98,5 @@ CarouselItem.propTypes = {
   itemIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
+  useBsClasses: PropTypes.bool,
 };

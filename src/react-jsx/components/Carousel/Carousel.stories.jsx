@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel/Carousel';
 import CarouselItem from './CarouselItem/CarouselItem';
+import CarouselItemCaption from './CarouselItemCaption/CarouselItemCaption';
 
 export default {
   title: 'Components/Carousel',
@@ -26,6 +27,16 @@ export default {
       defaultValue: false,
       description: 'Use fade transition',
     },
+    pauseOnHover: {
+      control: 'boolean',
+      defaultValue: true,
+      description: 'Pause sliding on mouse hover',
+    },
+    autoPlayAfterClick: {
+      control: 'boolean',
+      defaultValue: false,
+      description: 'Automatically resume sliding after clicking on a slide',
+    },
   },
 };
 
@@ -39,8 +50,12 @@ export function BasicCarousel(args) {
           alt="First slide"
           style={{ width: '100%', height: 300, objectFit: 'cover' }}
         />
+        <CarouselItemCaption>
+          <h5>First Slide</h5>
+          <p>Some description for the first slide.</p>
+        </CarouselItemCaption>
       </CarouselItem>
-      <CarouselItem itemIndex={1}>
+      <CarouselItem itemIndex={1} interval={5000}>
         <img
           src="/slide-2.png"
           className="d-block w-100"
@@ -48,7 +63,7 @@ export function BasicCarousel(args) {
           style={{ width: '100%', height: 300, objectFit: 'cover' }}
         />
       </CarouselItem>
-      <CarouselItem itemIndex={2}>
+      <CarouselItem itemIndex={2} interval={1000}>
         <img
           src="/slide-3.png"
           className="d-block w-100"
@@ -64,4 +79,6 @@ BasicCarousel.args = {
   controls: true,
   indicators: true,
   fade: false,
+  pauseOnHover: true,
+  autoPlayAfterClick: false,
 };

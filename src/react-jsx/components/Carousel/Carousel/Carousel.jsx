@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
+import { getFullClassName } from '../../../utilities/utilities';
 import { DIRECTIONS } from '../constants';
 
 const CarouselContext = createContext();
@@ -12,8 +13,17 @@ export default function Carousel({
   indicators = true,
   fade = false,
   pauseOnHover = true,
+  autoPlayAfterClick = false,
   className = '',
+  indicatorsClassName = '',
+  innerClassName = '',
+  controlsPrevClassName = '',
+  controlsPrevIconClassName = '',
+  controlsNextClassName = '',
+  controlsNextIconClassName = '',
   defaultDirection = DIRECTIONS.FORWARD,
+  touch = true,
+  useBsClasses = true,
   ...props
 }) {
   const prefix = usePrestylerPrefix();
@@ -23,10 +33,12 @@ export default function Carousel({
     activeIndex: 0,
     direction: DIRECTIONS.FORWARD,
   });
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const { childrenCount, childrenProps } = childrenData;
   const { activeIndex, prevIndex, direction } = slidesData;
   const isPaused = useRef(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const onlyPlayAfterClick = useRef(autoPlayAfterClick);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     setChildrenData({
@@ -39,6 +51,9 @@ export default function Carousel({
   }, [children]);
 
   function setSlide(moveBack, moveToIndex) {
+    if (onlyPlayAfterClick.current) {
+      onlyPlayAfterClick.current = false;
+    }
     if (moveToIndex === activeIndex) return;
     let nextDirection = defaultDirection;
     let nextActiveIndex = (activeIndex + 1) % childrenCount;
@@ -61,15 +76,34 @@ export default function Carousel({
   useEffect(() => {
     if (!interval || childrenCount <= 1) return;
     const timer = setInterval(() => {
-      if (!isPaused.current) {
+      if (!isPaused.current && !onlyPlayAfterClick.current) {
         setSlide();
       }
-    }, interval);
+    }, childrenProps[activeIndex].interval || interval);
     return () => clearInterval(timer); // eslint-disable-line consistent-return
   }, [interval, childrenCount, activeIndex]);
 
   function handleMouseHover(isHovered) {
     if (pauseOnHover) isPaused.current = isHovered;
+  }
+
+  function handleTouchStart(e) {
+    if (!touch) return;
+    touchStartX.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e) {
+    if (!touch || touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX.current;
+    if (Math.abs(deltaX) > 40) {
+      if (deltaX > 0) {
+        setSlide(true);
+      } else {
+        setSlide(false);
+      }
+    }
+    touchStartX.current = null;
   }
 
   const contextValue = useMemo(
@@ -82,16 +116,39 @@ export default function Carousel({
     [activeIndex, prevIndex, direction]
   );
 
+  const carouselFullClassName = getFullClassName(
+    ['carousel', 'slide', fade ? 'carousel-fade' : ''],
+    prefix,
+    useBsClasses,
+    className
+  );
+
+  const innerFullClassName = getFullClassName(
+    'carousel-inner',
+    prefix,
+    useBsClasses,
+    innerClassName
+  );
+
   return (
     <CarouselContext.Provider value={contextValue}>
       <div
-        className={`${prefix}carousel ${prefix}slide ${fade ? `${prefix}carousel-fade` : ''} ${className}`}
+        className={carouselFullClassName}
         onMouseEnter={() => handleMouseHover(true)}
         onMouseLeave={() => handleMouseHover(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         {...props}
       >
         {indicators && childrenCount > 0 && (
-          <div className={`${prefix}carousel-indicators`}>
+          <div
+            className={getFullClassName(
+              'carousel-indicators',
+              prefix,
+              useBsClasses,
+              indicatorsClassName
+            )}
+          >
             {React.Children.map(children, (_, idx) => {
               const childrenProp = childrenProps[idx];
               const ariaLabel = childrenProp['aria-label'] || `Slide ${idx + 1}`;
@@ -99,7 +156,9 @@ export default function Carousel({
               return (
                 <button
                   type="button"
-                  className={isActiveIndicator ? `${prefix}active` : ''}
+                  className={
+                    isActiveIndicator ? getFullClassName('active', prefix, useBsClasses) : ''
+                  }
                   data-bs-target="#carouselExampleIndicators"
                   aria-current={isActiveIndicator}
                   aria-label={ariaLabel}
@@ -111,27 +170,53 @@ export default function Carousel({
           </div>
         )}
 
-        <div className={`${prefix}carousel-inner`}>{children}</div>
+        <div className={innerFullClassName}>{children}</div>
 
         {controls && childrenCount > 1 && (
           <>
             <button
               type="button"
-              className={`${prefix}carousel-control-prev`}
+              className={getFullClassName(
+                'carousel-control-prev',
+                prefix,
+                useBsClasses,
+                controlsPrevClassName
+              )}
               onClick={() => setSlide(true)}
               aria-label="Previous"
               disabled={isTransitioning}
             >
-              <span className={`${prefix}carousel-control-prev-icon`} aria-hidden="true" />
+              <span
+                className={getFullClassName(
+                  'carousel-control-prev-icon',
+                  prefix,
+                  useBsClasses,
+                  controlsPrevIconClassName
+                )}
+                aria-hidden="true"
+              />
             </button>
             <button
               type="button"
-              className={`${prefix}carousel-control-next`}
+              className={getFullClassName(
+                'carousel-control-next',
+                prefix,
+                useBsClasses,
+                controlsNextClassName
+              )}
               onClick={() => setSlide()}
               aria-label="Next"
               disabled={isTransitioning}
             >
-              <span className={`${prefix}carousel-control-next-icon`} aria-hidden="true" />
+              <span
+                className={getFullClassName(
+                  'carousel-control-next-icon',
+                  prefix,
+                  useBsClasses,
+                  controlsNextIconClassName
+                )}
+                aria-hidden="true"
+              />
             </button>
           </>
         )}
@@ -148,7 +233,16 @@ Carousel.propTypes = {
   fade: PropTypes.bool,
   wrap: PropTypes.bool,
   pauseOnHover: PropTypes.bool,
+  autoPlayAfterClick: PropTypes.bool,
+  touch: PropTypes.bool,
   className: PropTypes.string,
+  indicatorsClassName: PropTypes.string,
+  innerClassName: PropTypes.string,
+  controlsPrevClassName: PropTypes.string,
+  controlsPrevIconClassName: PropTypes.string,
+  controlsNextClassName: PropTypes.string,
+  controlsNextIconClassName: PropTypes.string,
+  useBsClasses: PropTypes.bool,
   defaultDirection: PropTypes.oneOf(Object.values(DIRECTIONS)),
 };
 
