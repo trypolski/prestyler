@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
 import { getFullClassName } from '../../../utilities/utilities';
 import { useCarousel } from '../Carousel/Carousel';
-import { TRANSITION_CLASSNAMES } from '../constants';
+import { TRANSITION_CLASSNAMES, NON_BS_DEFAULTS } from '../constants';
 
 export default function CarouselItem({
   itemIndex,
@@ -19,11 +19,16 @@ export default function CarouselItem({
   const isActive = itemIndex === activeIndex;
   const isPrev = itemIndex === prevIndex;
 
-  const activeClassName = getFullClassName(TRANSITION_CLASSNAMES.ACTIVE, prefix, useBsClasses);
-  const startClassName = getFullClassName(TRANSITION_CLASSNAMES.START, prefix, useBsClasses);
-  const endClassName = getFullClassName(TRANSITION_CLASSNAMES.END, prefix, useBsClasses);
-  const nextClassName = getFullClassName(TRANSITION_CLASSNAMES.NEXT, prefix, useBsClasses);
-  const prevClassName = getFullClassName(TRANSITION_CLASSNAMES.PREV, prefix, useBsClasses);
+  const activeClassName =
+    getFullClassName(TRANSITION_CLASSNAMES.ACTIVE, prefix, useBsClasses) || NON_BS_DEFAULTS.ACTIVE;
+  const startClassName =
+    getFullClassName(TRANSITION_CLASSNAMES.START, prefix, useBsClasses) || NON_BS_DEFAULTS.START;
+  const endClassName =
+    getFullClassName(TRANSITION_CLASSNAMES.END, prefix, useBsClasses) || NON_BS_DEFAULTS.END;
+  const nextClassName =
+    getFullClassName(TRANSITION_CLASSNAMES.NEXT, prefix, useBsClasses) || NON_BS_DEFAULTS.NEXT;
+  const prevClassName =
+    getFullClassName(TRANSITION_CLASSNAMES.PREV, prefix, useBsClasses) || NON_BS_DEFAULTS.PREV;
 
   useEffect(() => {
     const carouselItemEl = carouselItemRef.current;

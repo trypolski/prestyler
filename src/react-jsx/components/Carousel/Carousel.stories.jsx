@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from './Carousel/Carousel';
 import CarouselItem from './CarouselItem/CarouselItem';
 import CarouselItemCaption from './CarouselItemCaption/CarouselItemCaption';
+import { DIRECTIONS } from './constants';
 
 export default {
   title: 'Components/Carousel',
@@ -9,7 +10,7 @@ export default {
   argTypes: {
     interval: {
       control: { type: 'number', min: 0, step: 500 },
-      defaultValue: 3000,
+      defaultValue: 2000,
       description: 'Interval between slides in ms (0 disables auto sliding)',
     },
     controls: {
@@ -37,6 +38,17 @@ export default {
       defaultValue: false,
       description: 'Automatically resume sliding after clicking on a slide',
     },
+    defaultDirection: {
+      control: { type: 'radio' },
+      options: [DIRECTIONS.FORWARD, DIRECTIONS.BACK],
+      defaultValue: DIRECTIONS.FORWARD,
+      description: 'Default slide direction',
+    },
+    touch: {
+      control: 'boolean',
+      defaultValue: true,
+      description: 'Enable touch gestures for slide navigation',
+    },
   },
 };
 
@@ -50,20 +62,20 @@ export function BasicCarousel(args) {
           alt="First slide"
           style={{ width: '100%', height: 300, objectFit: 'cover' }}
         />
-        <CarouselItemCaption>
-          <h5>First Slide</h5>
-          <p>Some description for the first slide.</p>
-        </CarouselItemCaption>
       </CarouselItem>
-      <CarouselItem itemIndex={1} interval={5000}>
+      <CarouselItem itemIndex={1}>
         <img
           src="/slide-2.png"
           className="d-block w-100"
           alt="Second slide"
           style={{ width: '100%', height: 300, objectFit: 'cover' }}
         />
+        <CarouselItemCaption>
+          <h5>Second Slide</h5>
+          <p>Caption description example</p>
+        </CarouselItemCaption>
       </CarouselItem>
-      <CarouselItem itemIndex={2} interval={1000}>
+      <CarouselItem itemIndex={2}>
         <img
           src="/slide-3.png"
           className="d-block w-100"
@@ -74,6 +86,7 @@ export function BasicCarousel(args) {
     </Carousel>
   );
 }
+
 BasicCarousel.args = {
   interval: 2000,
   controls: true,
@@ -81,4 +94,61 @@ BasicCarousel.args = {
   fade: false,
   pauseOnHover: true,
   autoPlayAfterClick: false,
+  defaultDirection: DIRECTIONS.FORWARD,
+  touch: true,
+};
+
+export function CarouselWithItemIntervals(args) {
+  return (
+    <Carousel {...args} style={{ maxWidth: 600 }}>
+      <CarouselItem itemIndex={0}>
+        <img
+          src="/slide-1.png"
+          className="d-block w-100"
+          alt="First slide"
+          style={{ width: '100%', height: 300, objectFit: 'cover' }}
+        />
+        <CarouselItemCaption>
+          <h5>First Slide</h5>
+          {/* eslint-disable-next-line react/destructuring-assignment */}
+          <p>Interval: default from Carousel ({args.interval} ms)</p>
+        </CarouselItemCaption>
+      </CarouselItem>
+      <CarouselItem itemIndex={1} interval={5000}>
+        <img
+          src="/slide-2.png"
+          className="d-block w-100"
+          alt="Second slide"
+          style={{ width: '100%', height: 300, objectFit: 'cover' }}
+        />
+        <CarouselItemCaption>
+          <h5>Second Slide</h5>
+          <p>Interval: 5000 ms (overrides Carousel default)</p>
+        </CarouselItemCaption>
+      </CarouselItem>
+      <CarouselItem itemIndex={2} interval={1000}>
+        <img
+          src="/slide-3.png"
+          className="d-block w-100"
+          alt="Third slide"
+          style={{ width: '100%', height: 300, objectFit: 'cover' }}
+        />
+        <CarouselItemCaption>
+          <h5>Third Slide</h5>
+          <p>Interval: 1000 ms (overrides Carousel default)</p>
+        </CarouselItemCaption>
+      </CarouselItem>
+    </Carousel>
+  );
+}
+
+CarouselWithItemIntervals.args = {
+  interval: 2000,
+  controls: true,
+  indicators: true,
+  fade: false,
+  pauseOnHover: true,
+  autoPlayAfterClick: false,
+  defaultDirection: DIRECTIONS.FORWARD,
+  touch: true,
 };
