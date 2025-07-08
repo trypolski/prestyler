@@ -40,4 +40,17 @@ describe('addPrefixToBsClasses', () => {
       'bs-btn,btn-primary bs-btn-lg'
     );
   });
+
+  it('filters out falsy and non-string values from bsClasses array', () => {
+    // This covers: classList = bsClasses.filter((cls) => cls && typeof cls === 'string');
+    expect(
+      addPrefixToBsClasses(['btn', null, undefined, '', 123, {}, 'btn-primary'], 'bs-', true)
+    ).toBe('bs-btn bs-btn-primary');
+  });
+
+  it('ignores non-string values in bsClasses array', () => {
+    expect(addPrefixToBsClasses([false, 'btn', 0, 'btn-primary', NaN], 'bs-', true)).toBe(
+      'bs-btn bs-btn-primary'
+    );
+  });
 });

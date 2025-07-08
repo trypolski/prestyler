@@ -11,3 +11,11 @@ export const TRANSITION_CLASSNAMES = {
   START: 'carousel-item-start',
   END: 'carousel-item-end',
 };
+
+export const NON_BS_DEFAULTS = {
+  ACTIVE: 'default-active',
+  NEXT: 'default-carousel-item-next',
+  PREV: 'default-carousel-item-prev',
+  START: 'default-carousel-item-start',
+  END: 'default-carousel-item-end',
+};
