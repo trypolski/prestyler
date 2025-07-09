@@ -7,7 +7,7 @@ export function addPrefixToBsClasses(bsClasses, prefix, useBsClasses) {
   // Normalize to array of class names
   let classList = [];
   if (Array.isArray(bsClasses)) {
-    classList = bsClasses;
+    classList = bsClasses.filter((cls) => cls && typeof cls === 'string');
   } else if (typeof bsClasses === 'string') {
     classList = bsClasses.trim().split(' ');
   }

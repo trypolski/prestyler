@@ -53,3 +53,7 @@ export { default as CardSubtitle } from '../../src/react-jsx/components/Card/Car
 export { default as CardText } from '../../src/react-jsx/components/Card/CardText/CardText';
 export { default as CardTitle } from '../../src/react-jsx/components/Card/CardTitle/CardTitle';
 export { default as CardLink } from '../../src/react-jsx/components/Card/CardLink/CardLink';
+
+export { default as Carousel } from '../../src/react-jsx/components/Carousel/Carousel/Carousel';
+export { default as CarouselItem } from '../../src/react-jsx/components/Carousel/CarouselItem/CarouselItem';
+export { default as CarouselItemCaption } from '../../src/react-jsx/components/Carousel/CarouselItemCaption/CarouselItemCaption';
