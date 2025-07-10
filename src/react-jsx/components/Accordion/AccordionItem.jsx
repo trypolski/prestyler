@@ -2,6 +2,19 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useAccordion } from './Accordion';
 import { usePrestylerPrefix } from '../../hooks/usePrestylerPrefix';
+import { getFullClassName } from '../../utilities/utilities';
+
+const OFFSET_VALUES_HORIZONTAL = {
+  style: 'width',
+  value: 'offsetWidth',
+  scroll: 'scrollWidth',
+};
+
+const OFFSET_VALUES_VERTICAL = {
+  style: 'height',
+  value: 'offsetHeight',
+  scroll: 'scrollHeight',
+};
 
 export default function AccordionItem({
   id,
@@ -19,12 +32,21 @@ export default function AccordionItem({
   bodyTestId = `accordion-item-body-${id}`,
   useBsClasses = true,
   onClick = () => {},
+  isSingleCollapse = false,
+  show = false,
+  horizontal = false,
+  bodyWidth = '',
 }) {
   const prefix = usePrestylerPrefix();
-  const { toggleItem, isItemOpen } = useAccordion();
+  const { toggleItem, isItemOpen } = isSingleCollapse
+    ? { toggleItem: () => {}, isItemOpen: () => false }
+    : useAccordion();
+
   const collapseRef = useRef(null);
   const [init, setInit] = useState(true);
-  const isOpen = isItemOpen(id);
+  const isOpen = isSingleCollapse ? show : isItemOpen(id);
+
+  const offset = horizontal ? OFFSET_VALUES_HORIZONTAL : OFFSET_VALUES_VERTICAL;
 
   useEffect(() => {
     const collapseEl = collapseRef.current;
@@ -37,28 +59,26 @@ export default function AccordionItem({
       if (isOpen) {
         collapseEl.classList.remove(`${prefix}collapsing`);
         collapseEl.classList.add(`${prefix}collapse`, `${prefix}show`);
-        collapseEl.style.height = '';
       } else {
         collapseEl.classList.remove(`${prefix}collapsing`);
         collapseEl.classList.add(`${prefix}collapse`);
-        collapseEl.style.height = '';
       }
+      collapseEl.style[offset.style] = '';
       collapseEl.removeEventListener('transitionend', transitionEndListener);
     }
     collapseEl.addEventListener('transitionend', transitionEndListener);
-
     if (isOpen) {
       collapseEl.classList.remove(`${prefix}collapse`);
       collapseEl.classList.add(`${prefix}collapsing`);
-      collapseEl.style.height = '0px';
-      collapseEl.offsetHeight; // eslint-disable-line no-unused-expressions
-      collapseEl.style.height = `${collapseEl.scrollHeight}px`;
+      collapseEl.style[offset.style] = '0px';
+      collapseEl[offset.value]; // eslint-disable-line no-unused-expressions
+      collapseEl.style[offset.style] = `${collapseEl[offset.scroll]}px`;
     } else {
-      collapseEl.style.height = `${collapseEl.scrollHeight}px`;
-      collapseEl.offsetHeight; // eslint-disable-line no-unused-expressions
+      collapseEl.style[offset.style] = `${collapseEl[offset.scroll]}px`;
+      collapseEl[offset.value]; // eslint-disable-line no-unused-expressions
       collapseEl.classList.remove(`${prefix}collapse`, `${prefix}show`);
       collapseEl.classList.add(`${prefix}collapsing`);
-      collapseEl.style.height = '0px';
+      collapseEl.style[offset.style] = '0px';
     }
   }, [isOpen]);
 
@@ -67,19 +87,57 @@ export default function AccordionItem({
     onClick(e, id);
   }
 
-  let fullItemClasses = itemClassName;
-  let fullTitleClasses = titleClassName;
-  let fullButtonClasses = buttonClassName;
-  let fullCollapseClasses = collapseClassName;
-  let fullBodyClasses = bodyClassName;
-  if (useBsClasses) {
-    fullItemClasses = `${prefix}accordion-item ${itemClassName}`.trim();
-    fullTitleClasses = `${prefix}accordion-header ${titleClassName}`.trim();
-    fullButtonClasses = `${prefix}accordion-button ${buttonClassName}`.trim();
-    fullCollapseClasses =
-      `${prefix}accordion-collapse ${prefix}collapse ${collapseClassName}`.trim();
-    fullBodyClasses = `${prefix}accordion-body ${bodyClassName}`.trim();
+  const fullItemClasses = getFullClassName('accordion-item', prefix, useBsClasses, itemClassName);
+  const fullTitleClasses = getFullClassName(
+    'accordion-header',
+    prefix,
+    useBsClasses,
+    titleClassName
+  );
+  const fullButtonClasses = getFullClassName(
+    'accordion-button',
+    prefix,
+    useBsClasses,
+    buttonClassName
+  );
+  const fullCollapseClasses = getFullClassName(
+    [
+      isSingleCollapse ? '' : 'accordion-collapse',
+      horizontal ? 'collapse-horizontal' : '',
+      'collapse',
+    ],
+    prefix,
+    useBsClasses,
+    collapseClassName
+  );
+  const fullBodyClasses = getFullClassName(
+    isSingleCollapse ? '' : 'accordion-body',
+    prefix,
+    useBsClasses,
+    bodyClassName
+  );
+
+  function renderCollapse() {
+    return (
+      <div
+        id={isSingleCollapse ? id : `panel-${id}`}
+        ref={collapseRef}
+        className={fullCollapseClasses}
+        aria-labelledby={isSingleCollapse ? undefined : `heading-${id}`}
+        data-testid={isSingleCollapse ? `collapse${id ? `-${id}` : ''}` : collapseTestId}
+      >
+        <div
+          className={fullBodyClasses}
+          data-testid={isSingleCollapse ? undefined : bodyTestId}
+          style={horizontal && bodyWidth ? { width: bodyWidth } : {}}
+        >
+          {children}
+        </div>
+      </div>
+    );
   }
+
+  if (isSingleCollapse) return renderCollapse();
 
   return (
     <div className={fullItemClasses} data-testid={itemTestId}>
@@ -95,17 +153,7 @@ export default function AccordionItem({
           {title}
         </button>
       </h2>
-      <div
-        id={`panel-${id}`}
-        ref={collapseRef}
-        className={fullCollapseClasses}
-        aria-labelledby={`heading-${id}`}
-        data-testid={collapseTestId}
-      >
-        <div className={fullBodyClasses} data-testid={bodyTestId}>
-          {children}
-        </div>
-      </div>
+      {renderCollapse()}
     </div>
   );
 }
@@ -126,4 +174,8 @@ AccordionItem.propTypes = {
   bodyTestId: PropTypes.string,
   useBsClasses: PropTypes.bool,
   onClick: PropTypes.func,
+  isSingleCollapse: PropTypes.bool,
+  show: PropTypes.bool,
+  horizontal: PropTypes.bool,
+  bodyWidth: PropTypes.string,
 };
