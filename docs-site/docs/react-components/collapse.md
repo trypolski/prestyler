@@ -2,7 +2,7 @@
 sidebar_position: 10
 ---
 
-# Collapse Component
+# Collapse
 
 The Prestyler `Collapse` component provides a flexible, Bootstrap-style collapse/expand animation for any content. It is a simplified wrapper around `AccordionItem`, using only the logic and markup needed for a single collapsible region. This means there is no header, button, or accordion logic—just the collapse animation and content.
 
