@@ -45,5 +45,5 @@ MultipleOpenAllowed.args = {
 export const FirstItemOpened = Template.bind({});
 FirstItemOpened.args = {
   allowMultiple: false,
-  defaultOpenItems: ['2'],
+  defaultOpenItems: ['1'],
 };
