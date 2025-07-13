@@ -10,6 +10,7 @@ export default function Button({
   isOutlined,
   isToggleable,
   isActive,
+  isDropdownToggle,
   ...props
 }) {
   let bsClasses = ['btn'];
@@ -23,6 +24,9 @@ export default function Button({
   if (!isCloseButton) {
     if (isOutlined) bsClasses = bsClasses.map((cls) => cls.replace('btn-', 'btn-outline-'));
     if (isToggleable && isActive) bsClasses.push('active');
+  }
+  if (isDropdownToggle) {
+    bsClasses.push(BUTTON_CLASSES.dropdownToggle);
   }
 
   const closeButtonProps = isCloseButton
@@ -52,4 +56,5 @@ Button.propTypes = {
   isToggleable: PropTypes.bool,
   isActive: PropTypes.bool,
   'aria-label': PropTypes.string,
+  isDropdownToggle: PropTypes.bool,
 };

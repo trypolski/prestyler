@@ -17,6 +17,6 @@ export default function Wrapper({ tag: Tag = 'div', wrapperClass, ...props }) {
 }
 
 Wrapper.propTypes = {
-  tag: PropTypes.oneOf(['div', 'p']),
+  tag: PropTypes.oneOf(['div', 'p', 'ul']),
   wrapperClass: PropTypes.string,
 };
