@@ -57,3 +57,5 @@ export { default as CardLink } from '../../src/react-jsx/components/Card/CardLin
 export { default as Carousel } from '../../src/react-jsx/components/Carousel/Carousel/Carousel';
 export { default as CarouselItem } from '../../src/react-jsx/components/Carousel/CarouselItem/CarouselItem';
 export { default as CarouselItemCaption } from '../../src/react-jsx/components/Carousel/CarouselItemCaption/CarouselItemCaption';
+
+export { default as Collapse } from '../../src/react-jsx/components/Collapse/Collapse';

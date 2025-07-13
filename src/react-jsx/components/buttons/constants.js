@@ -1,3 +1,5 @@
+import { DROPDOWN_CLASSES } from '../Dropdown/constants';
+
 export const BUTTON_CLASSES = {
   default: 'btn',
   primary: 'btn-primary',
@@ -10,6 +12,7 @@ export const BUTTON_CLASSES = {
   dark: 'btn-dark',
   link: 'btn-link',
   close: 'btn-close',
+  dropdownToggle: DROPDOWN_CLASSES.dropdownToggle,
 };
 
 export const BUTTON_SIZES = {

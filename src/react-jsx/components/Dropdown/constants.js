@@ -1,0 +1,8 @@
+// eslint-disable-next-line import/prefer-default-export
+export const DROPDOWN_CLASSES = {
+  dropdown: 'dropdown',
+  dropdownToggle: 'dropdown-toggle',
+  dropdownMenu: 'dropdown-menu',
+  dropdownItem: 'dropdown-item',
+  dropdownDivider: 'dropdown-divider',
+};
