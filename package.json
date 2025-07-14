@@ -59,6 +59,7 @@
     "README.md"
   ],
   "dependencies": {
+    "@floating-ui/react-dom": "^2.1.4",
     "bootstrap": "^5.3.6",
     "glob": "^11.0.3",
     "mkdirp": "^3.0.1",

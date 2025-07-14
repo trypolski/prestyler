@@ -5,4 +5,6 @@ export const DROPDOWN_CLASSES = {
   dropdownMenu: 'dropdown-menu',
   dropdownItem: 'dropdown-item',
   dropdownDivider: 'dropdown-divider',
+  dropdownToggleSplit: 'dropdown-toggle-split',
+  dropdownShow: 'show',
 };

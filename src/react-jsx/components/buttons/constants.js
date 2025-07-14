@@ -13,6 +13,8 @@ export const BUTTON_CLASSES = {
   link: 'btn-link',
   close: 'btn-close',
   dropdownToggle: DROPDOWN_CLASSES.dropdownToggle,
+  dropdownToggleSplit: DROPDOWN_CLASSES.dropdownToggleSplit,
+  dropdownShow: DROPDOWN_CLASSES.dropdownShow,
 };
 
 export const BUTTON_SIZES = {
