@@ -10,7 +10,9 @@ export default function Button({
   isOutlined,
   isToggleable,
   isActive,
-  isDropdownToggle,
+  isDropdownToggle = false,
+  isDropdownToggleSplit = false,
+  show = false,
   ...props
 }) {
   let bsClasses = ['btn'];
@@ -27,6 +29,12 @@ export default function Button({
   }
   if (isDropdownToggle) {
     bsClasses.push(BUTTON_CLASSES.dropdownToggle);
+    if (show) {
+      bsClasses.push(BUTTON_CLASSES.dropdownShow);
+    }
+    if (isDropdownToggleSplit) {
+      bsClasses.push(BUTTON_CLASSES.dropdownToggleSplit);
+    }
   }
 
   const closeButtonProps = isCloseButton
@@ -57,4 +65,6 @@ Button.propTypes = {
   isActive: PropTypes.bool,
   'aria-label': PropTypes.string,
   isDropdownToggle: PropTypes.bool,
+  isDropdownToggleSplit: PropTypes.bool,
+  show: PropTypes.bool,
 };
