@@ -4,7 +4,7 @@ import { DROPDOWN_CLASSES } from '../constants';
 import { useDropdown } from '../Dropdown/Dropdown';
 
 export default function DropdownMenu(props) {
-  const { showDropdown } = useDropdown();
+  const { showDropdown, refs, floatingStyles } = useDropdown();
   return (
     <Wrapper
       {...props}
@@ -13,6 +13,8 @@ export default function DropdownMenu(props) {
         DROPDOWN_CLASSES.dropdownMenu,
         showDropdown ? DROPDOWN_CLASSES.dropdownShow : '',
       ]}
+      ref={refs.setFloating}
+      style={floatingStyles}
     />
   );
 }
