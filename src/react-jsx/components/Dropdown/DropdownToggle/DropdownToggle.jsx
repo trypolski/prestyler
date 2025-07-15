@@ -8,7 +8,7 @@ export default function DropdownToggle({
   disableHookToggle = false,
   ...props
 }) {
-  const { showDropdown, setShowDropdown } = useDropdown();
+  const { showDropdown, setShowDropdown, refs } = useDropdown();
   const showValue = typeof showProp === 'boolean' ? showProp : showDropdown;
 
   if (!ButtonComponent) return null;
@@ -17,6 +17,7 @@ export default function DropdownToggle({
     <ButtonComponent
       {...props}
       show={showValue}
+      ref={refs.setReference}
       onClick={(e) => {
         if (props.onClick) props.onClick(e);
         if (!disableHookToggle) setShowDropdown((prev) => !prev);
