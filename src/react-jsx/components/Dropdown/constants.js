@@ -4,6 +4,7 @@ export const DROPDOWN_CLASSES = {
   dropdownToggle: 'dropdown-toggle',
   dropdownMenu: 'dropdown-menu',
   dropdownItem: 'dropdown-item',
+  dropdownItemText: 'dropdown-item-text',
   dropdownDivider: 'dropdown-divider',
   dropdownToggleSplit: 'dropdown-toggle-split',
   dropdownShow: 'show',

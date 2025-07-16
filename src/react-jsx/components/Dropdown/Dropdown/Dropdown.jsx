@@ -10,6 +10,7 @@ export default function Dropdown({
   show = false,
   isDropdownToggleSplit = false,
   floatingOptions = {},
+  isButtonGroup = false,
   ...props
 }) {
   const [showDropdown, setShowDropdown] = useState(show);
@@ -31,11 +32,16 @@ export default function Dropdown({
     [showDropdown, refs, floatingStyles]
   );
 
+  const useButtonGroupClass = isButtonGroup || isDropdownToggleSplit;
+
   return (
     <DropdownContext.Provider value={contextValue}>
       <Wrapper
         {...props}
-        wrapperClass={[DROPDOWN_CLASSES.dropdown, isDropdownToggleSplit ? 'btn-group' : '']}
+        wrapperClass={[
+          !useButtonGroupClass ? DROPDOWN_CLASSES.dropdown : '',
+          useButtonGroupClass ? 'btn-group' : '',
+        ]}
       />
     </DropdownContext.Provider>
   );
@@ -45,6 +51,7 @@ Dropdown.propTypes = {
   show: PropTypes.bool,
   isDropdownToggleSplit: PropTypes.bool,
   floatingOptions: PropTypes.object,
+  isButtonGroup: PropTypes.bool,
 };
 
 export const useDropdown = () => useContext(DropdownContext);
