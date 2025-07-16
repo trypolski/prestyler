@@ -11,23 +11,49 @@ export default function DropdownItem({
   useBsClasses = true,
   href = '#',
   listItemProps = {},
+  isButton = false,
+  isText = false,
+  isActive = false,
   ...props
 }) {
   const prefix = usePrestylerPrefix();
 
   const listItemFullClassName = getFullClassName('', prefix, useBsClasses, listItemClassName);
-  const linkFullClassName = getFullClassName(
-    DROPDOWN_CLASSES.dropdownItem,
+  const itemFullClassName = getFullClassName(
+    [
+      isText ? DROPDOWN_CLASSES.dropdownItemText : DROPDOWN_CLASSES.dropdownItem,
+      isActive ? 'active' : '',
+    ],
     prefix,
     useBsClasses,
     linkClassName
   );
 
-  return (
-    <li {...listItemProps} className={listItemFullClassName}>
-      <a {...props} className={linkFullClassName} href={href}>
+  function renderItem() {
+    if (isButton) {
+      return (
+        <button type="button" {...props} className={itemFullClassName}>
+          {children}
+        </button>
+      );
+    }
+    if (isText) {
+      return (
+        <span {...props} className={itemFullClassName}>
+          {children}
+        </span>
+      );
+    }
+    return (
+      <a {...props} className={itemFullClassName} href={href}>
         {children}
       </a>
+    );
+  }
+
+  return (
+    <li {...listItemProps} className={listItemFullClassName}>
+      {renderItem()}
     </li>
   );
 }
@@ -39,4 +65,7 @@ DropdownItem.propTypes = {
   linkClassName: PropTypes.string,
   href: PropTypes.string,
   listItemProps: PropTypes.object,
+  isButton: PropTypes.bool,
+  isText: PropTypes.bool,
+  isActive: PropTypes.bool,
 };
