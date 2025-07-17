@@ -14,7 +14,9 @@ export default {
 export function BasicDropdown() {
   return (
     <Dropdown>
-      <DropdownToggle buttonComponent={PrimaryButton}>Dropdown Button</DropdownToggle>
+      <DropdownToggle buttonComponent={PrimaryButton}>
+        Dropdown Button Very Long Long
+      </DropdownToggle>
       <DropdownMenu>
         <DropdownItem href="#action1">Action</DropdownItem>
         <DropdownItem href="#action2">Another action</DropdownItem>

@@ -15,6 +15,7 @@ export default function DropdownMenu(props) {
       ]}
       ref={refs.setFloating}
       style={floatingStyles}
+      data-bs-popper
     />
   );
 }
