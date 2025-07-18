@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Wrapper from '../../common/Wrapper/Wrapper';
-import { DROPDOWN_CLASSES } from '../constants';
+import { DROPDOWN_CLASSES, DROPDOWN_ALIGNMENT_CLASSES } from '../constants';
 import { useDropdown } from '../Dropdown/Dropdown';
 
-export default function DropdownMenu(props) {
+export default function DropdownMenu({ alignment = '', ...props }) {
   const { showDropdown, refs, floatingStyles } = useDropdown();
   return (
     <Wrapper
@@ -12,6 +13,9 @@ export default function DropdownMenu(props) {
       wrapperClass={[
         DROPDOWN_CLASSES.dropdownMenu,
         showDropdown ? DROPDOWN_CLASSES.dropdownShow : '',
+        ...(Array.isArray(alignment)
+          ? alignment.map((align) => DROPDOWN_ALIGNMENT_CLASSES[align])
+          : [DROPDOWN_ALIGNMENT_CLASSES[alignment]]),
       ]}
       ref={refs.setFloating}
       style={floatingStyles}
@@ -19,3 +23,10 @@ export default function DropdownMenu(props) {
     />
   );
 }
+
+DropdownMenu.propTypes = {
+  alignment: PropTypes.oneOfType([
+    PropTypes.oneOf(Object.keys(DROPDOWN_ALIGNMENT_CLASSES)),
+    PropTypes.arrayOf(PropTypes.oneOf(Object.keys(DROPDOWN_ALIGNMENT_CLASSES))),
+  ]),
+};
