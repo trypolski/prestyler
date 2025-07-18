@@ -32,7 +32,7 @@ export function SplitButton() {
     <Dropdown isDropdownToggleSplit>
       <SecondaryButton>Split Dropdown</SecondaryButton>
       <DropdownToggle buttonComponent={SecondaryButton} isDropdownToggleSplit />
-      <DropdownMenu>
+      <DropdownMenu alignment={['lg-end', 'md-start']}>
         <DropdownItem href="#action1">Action</DropdownItem>
         <DropdownItem href="#action2">Another action</DropdownItem>
         <DropdownDivider />

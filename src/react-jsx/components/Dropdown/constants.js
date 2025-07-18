@@ -12,3 +12,17 @@ export const DROPDOWN_CLASSES = {
   dropdownToggleSplit: 'dropdown-toggle-split',
   dropdownShow: 'show',
 };
+
+export const DROPDOWN_ALIGNMENT_CLASSES = {
+  '': '',
+  'sm-start': 'dropdown-menu-sm-start',
+  'sm-end': 'dropdown-menu-sm-end',
+  'md-start': 'dropdown-menu-md-start',
+  'md-end': 'dropdown-menu-md-end',
+  'lg-start': 'dropdown-menu-lg-start',
+  'lg-end': 'dropdown-menu-lg-end',
+  'xl-start': 'dropdown-menu-xl-start',
+  'xl-end': 'dropdown-menu-xl-end',
+  'xxl-start': 'dropdown-menu-xxl-start',
+  'xxl-end': 'dropdown-menu-xxl-end',
+};
