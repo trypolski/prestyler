@@ -9,6 +9,7 @@ export const DROPDOWN_CLASSES = {
   dropdownItem: 'dropdown-item',
   dropdownItemText: 'dropdown-item-text',
   dropdownDivider: 'dropdown-divider',
+  dropdownHeader: 'dropdown-header',
   dropdownToggleSplit: 'dropdown-toggle-split',
   dropdownShow: 'show',
 };
