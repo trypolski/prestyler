@@ -14,7 +14,7 @@ export default {
 
 export function BasicDropdown() {
   return (
-    <Dropdown>
+    <Dropdown autoClose={false}>
       <DropdownToggle buttonComponent={PrimaryButton}>
         Dropdown Button Very Long Long
       </DropdownToggle>

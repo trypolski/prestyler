@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useMemo } from 'react';
+import React, { createContext, useState, useEffect, useRef, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useFloating, offset, autoPlacement } from '@floating-ui/react-dom';
 import Wrapper from '../../common/Wrapper/Wrapper';
@@ -20,9 +20,11 @@ export default function Dropdown({
   floatingOptions = {},
   isButtonGroup = false,
   placement = 'down',
+  autoClose = true,
   ...props
 }) {
   const [showDropdown, setShowDropdown] = useState(show);
+  const dropdownRef = useRef(null);
   const { refs, floatingStyles } = useFloatingUI
     ? useFloating({
         open: showDropdown,
@@ -32,6 +34,21 @@ export default function Dropdown({
         ...floatingOptions,
       })
     : { refs: {}, floatingStyles: {} };
+
+  useEffect(() => {
+    if (!showDropdown || !autoClose) return;
+
+    function handleClick(event) {
+      const dropdownRefCurrent = dropdownRef.current;
+      if (dropdownRefCurrent && !dropdownRefCurrent.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClick);
+    // eslint-disable-next-line consistent-return
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showDropdown, autoClose]);
 
   const contextValue = useMemo(
     () => ({
@@ -49,6 +66,7 @@ export default function Dropdown({
     <DropdownContext.Provider value={contextValue}>
       <Wrapper
         {...props}
+        ref={dropdownRef}
         wrapperClass={[
           !useFloatingUI && PLACEMENTS[placement],
           useButtonGroupClass ? 'btn-group' : '',
@@ -65,6 +83,7 @@ Dropdown.propTypes = {
   isButtonGroup: PropTypes.bool,
   useFloatingUI: PropTypes.bool,
   placement: PropTypes.oneOf(['down', 'top', 'right', 'left']),
+  autoClose: PropTypes.bool,
 };
 
 export const useDropdown = () => useContext(DropdownContext);
