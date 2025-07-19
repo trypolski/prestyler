@@ -13,6 +13,7 @@ export default function DropdownItem({
   listItemProps = {},
   isButton = false,
   isText = false,
+  isLink = false,
   isActive = false,
   ...props
 }) {
@@ -44,11 +45,14 @@ export default function DropdownItem({
         </span>
       );
     }
-    return (
-      <a {...props} className={itemFullClassName} href={href}>
-        {children}
-      </a>
-    );
+    if (isLink) {
+      return (
+        <a {...props} className={itemFullClassName} href={href}>
+          {children}
+        </a>
+      );
+    }
+    return children;
   }
 
   return (
@@ -67,5 +71,6 @@ DropdownItem.propTypes = {
   listItemProps: PropTypes.object,
   isButton: PropTypes.bool,
   isText: PropTypes.bool,
+  isLink: PropTypes.bool,
   isActive: PropTypes.bool,
 };
