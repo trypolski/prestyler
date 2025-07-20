@@ -124,9 +124,9 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownDivider,
-  DropdownHeader
-} from './Dropdown';
-import { PrimaryButton } from '../buttons/Buttons';
+  DropdownHeader,
+  PrimaryButton
+} from 'prestyler/react/jsx/';
 
 <Dropdown>
   <DropdownToggle buttonComponent={PrimaryButton}>
