@@ -6,7 +6,7 @@ import { getFullClassName } from '../../../utilities/utilities';
 
 export default function DropdownItem({
   listItemClassName,
-  linkClassName,
+  className = '',
   children,
   useBsClasses = true,
   href = '#',
@@ -24,10 +24,11 @@ export default function DropdownItem({
     [
       isText ? DROPDOWN_CLASSES.dropdownItemText : DROPDOWN_CLASSES.dropdownItem,
       isActive ? 'active' : '',
+      props.disabled ? 'disabled' : '',
     ],
     prefix,
     useBsClasses,
-    linkClassName
+    className
   );
 
   function renderItem() {
@@ -47,7 +48,12 @@ export default function DropdownItem({
     }
     if (isLink) {
       return (
-        <a {...props} className={itemFullClassName} href={href}>
+        <a
+          {...props}
+          className={itemFullClassName}
+          href={href}
+          aria-disabled={props.disabled ? 'true' : undefined}
+        >
           {children}
         </a>
       );
@@ -66,11 +72,12 @@ DropdownItem.propTypes = {
   children: PropTypes.node.isRequired,
   useBsClasses: PropTypes.bool,
   listItemClassName: PropTypes.string,
-  linkClassName: PropTypes.string,
+  className: PropTypes.string,
   href: PropTypes.string,
   listItemProps: PropTypes.object,
   isButton: PropTypes.bool,
   isText: PropTypes.bool,
   isLink: PropTypes.bool,
   isActive: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
