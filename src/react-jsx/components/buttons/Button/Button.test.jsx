@@ -160,4 +160,26 @@ describe('Button', () => {
       expect(btn.className.split(' ')).not.toContain(`${PREFIX}btn-outline-close`);
     });
   });
+
+  describe('Dropdown button', () => {
+    it('applies dropdown toggle, split, and show classes when isDropdownToggle, isDropdownToggleSplit, and show are true', () => {
+      render(
+        <Button
+          variant="primary"
+          isDropdownToggle
+          isDropdownToggleSplit
+          show
+          data-testid="dropdown-toggle-btn"
+        >
+          Dropdown Toggle
+        </Button>
+      );
+      const buttonClasses = screen.getByTestId('dropdown-toggle-btn').className.split(' ');
+      expect(buttonClasses).toContain(`${PREFIX}btn`);
+      expect(buttonClasses).toContain(`${PREFIX}${BUTTON_CLASSES.primary}`);
+      expect(buttonClasses).toContain(`${PREFIX}${BUTTON_CLASSES.dropdownToggle}`);
+      expect(buttonClasses).toContain(`${PREFIX}${BUTTON_CLASSES.dropdownShow}`);
+      expect(buttonClasses).toContain(`${PREFIX}${BUTTON_CLASSES.dropdownToggleSplit}`);
+    });
+  });
 });
