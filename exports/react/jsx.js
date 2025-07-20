@@ -59,3 +59,10 @@ export { default as CarouselItem } from '../../src/react-jsx/components/Carousel
 export { default as CarouselItemCaption } from '../../src/react-jsx/components/Carousel/CarouselItemCaption/CarouselItemCaption';
 
 export { default as Collapse } from '../../src/react-jsx/components/Collapse/Collapse';
+
+export { default as Dropdown } from '../../src/react-jsx/components/Dropdown/Dropdown/Dropdown';
+export { default as DropdownDivider } from '../../src/react-jsx/components/Dropdown/DropdownDivider/DropdownDivider';
+export { default as DropdownHeader } from '../../src/react-jsx/components/Dropdown/DropdownHeader/DropdownHeader';
+export { default as DropdownItem } from '../../src/react-jsx/components/Dropdown/DropdownItem/DropdownItem';
+export { default as DropdownMenu } from '../../src/react-jsx/components/Dropdown/DropdownMenu/DropdownMenu';
+export { default as DropdownToggle } from '../../src/react-jsx/components/Dropdown/DropdownToggle/DropdownToggle';
