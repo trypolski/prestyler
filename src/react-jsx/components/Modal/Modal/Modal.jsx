@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from '../../common/Wrapper/Wrapper';
 
-const MODAL_SIZES = {
+export const MODAL_SIZES = {
   '': '',
   sm: 'modal-sm',
   lg: 'modal-lg',
   xl: 'modal-xl',
 };
 
-const FULL_SCREEN_SIZES = {
+export const FULL_SCREEN_SIZES = {
   '': '',
   all: 'modal-fullscreen',
   sm: 'modal-fullscreen-sm-down',
@@ -21,10 +21,10 @@ const FULL_SCREEN_SIZES = {
 
 export default function Modal({
   children,
-  show,
-  isFade,
-  isScrollable,
-  isCentered,
+  show = false,
+  isFade = false,
+  isScrollable = false,
+  isCentered = false,
   size = '',
   fullScreenSize = '',
   wrapperProps,
