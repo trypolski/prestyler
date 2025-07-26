@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import ReactModal from 'react-modal';
+import { usePrestylerPrefix } from '../../../hooks/usePrestylerPrefix';
+import { getFullClassName } from '../../../utilities/utilities';
 import Wrapper from '../../common/Wrapper/Wrapper';
 
 export const MODAL_SIZES = {
@@ -27,10 +31,13 @@ export default function Modal({
   isCentered = false,
   size = '',
   fullScreenSize = '',
-  wrapperProps,
-  dialogProps,
-  contentProps,
+  wrapperProps = {},
+  dialogProps = {},
+  contentProps = {},
+  onRequestClose, // <-- add this for react-modal
+  ...rest
 }) {
+  const prefix = usePrestylerPrefix();
   const wrapperClasses = ['modal', ...(show ? ['d-block', 'show'] : []), isFade ? 'fade' : ''];
   const dialogClasses = [
     'modal-dialog',
@@ -41,14 +48,32 @@ export default function Modal({
   ];
   const contentClasses = ['modal-content'];
 
+  const fullWrapperClasses = getFullClassName(
+    wrapperClasses,
+    prefix,
+    rest.useBsClasses || true,
+    wrapperProps.className || ''
+  );
+  const fullDialogClasses = getFullClassName(
+    dialogClasses,
+    prefix,
+    rest.useBsClasses || true,
+    dialogProps.className || ''
+  );
+
   return (
-    <Wrapper {...wrapperProps} wrapperClass={wrapperClasses}>
-      <Wrapper {...dialogProps} wrapperClass={dialogClasses}>
-        <Wrapper {...contentProps} wrapperClass={contentClasses}>
-          {children}
-        </Wrapper>
+    <ReactModal
+      isOpen={show}
+      onRequestClose={onRequestClose}
+      className={fullDialogClasses}
+      overlayClassName={fullWrapperClasses}
+      ariaHideApp={false}
+      {...rest}
+    >
+      <Wrapper {...contentProps} wrapperClass={contentClasses}>
+        {children}
       </Wrapper>
-    </Wrapper>
+    </ReactModal>
   );
 }
 
@@ -63,4 +88,5 @@ Modal.propTypes = {
   wrapperProps: PropTypes.object,
   dialogProps: PropTypes.object,
   contentProps: PropTypes.object,
+  onRequestClose: PropTypes.func,
 };
