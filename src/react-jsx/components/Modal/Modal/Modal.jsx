@@ -31,6 +31,7 @@ export default function Modal({
   isCentered = false,
   size = '',
   fullScreenSize = '',
+  useReactModal = true,
   wrapperProps = {},
   dialogProps = {},
   contentProps = {},
@@ -61,19 +62,30 @@ export default function Modal({
     dialogProps.className || ''
   );
 
+  if (useReactModal) {
+    return (
+      <ReactModal
+        isOpen={show}
+        onRequestClose={onRequestClose}
+        className={fullDialogClasses}
+        overlayClassName={fullWrapperClasses}
+        ariaHideApp={false}
+        {...rest}
+      >
+        <Wrapper {...contentProps} wrapperClass={contentClasses}>
+          {children}
+        </Wrapper>
+      </ReactModal>
+    );
+  }
   return (
-    <ReactModal
-      isOpen={show}
-      onRequestClose={onRequestClose}
-      className={fullDialogClasses}
-      overlayClassName={fullWrapperClasses}
-      ariaHideApp={false}
-      {...rest}
-    >
-      <Wrapper {...contentProps} wrapperClass={contentClasses}>
-        {children}
+    <Wrapper {...wrapperProps} wrapperClass={wrapperClasses}>
+      <Wrapper {...dialogProps} wrapperClass={dialogClasses}>
+        <Wrapper {...contentProps} wrapperClass={contentClasses}>
+          {children}
+        </Wrapper>
       </Wrapper>
-    </ReactModal>
+    </Wrapper>
   );
 }
 
@@ -85,6 +97,7 @@ Modal.propTypes = {
   isCentered: PropTypes.bool,
   size: PropTypes.oneOf(Object.keys(MODAL_SIZES)),
   fullScreenSize: PropTypes.oneOf(Object.keys(FULL_SCREEN_SIZES)),
+  useReactModal: PropTypes.bool,
   wrapperProps: PropTypes.object,
   dialogProps: PropTypes.object,
   contentProps: PropTypes.object,
