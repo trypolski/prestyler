@@ -3,10 +3,12 @@ import { render, screen } from '@testing-library/react';
 import Modal, { MODAL_SIZES, FULL_SCREEN_SIZES } from './Modal';
 
 describe('Modal', () => {
-  describe('without React Modal', () => {
+  describe('withReact Modal', () => {
     it('renders with default classes and children', () => {
+      const onRequestClose = jest.fn();
+
       render(
-        <Modal show>
+        <Modal show onRequestClose={onRequestClose}>
           <div>Modal Content</div>
         </Modal>
       );
@@ -31,6 +33,9 @@ describe('Modal', () => {
       const content = reactModalDialog.querySelector(`.${PREFIX}modal-content`);
       expect(content).toBeInTheDocument();
       expect(content).toHaveTextContent('Modal Content');
+
+      reactModalOverlay.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      expect(onRequestClose).toHaveBeenCalled();
     });
 
     it('should not pass wrapperProps and dialogProps', () => {
