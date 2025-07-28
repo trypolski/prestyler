@@ -79,3 +79,9 @@ export {
   LightListGroupItem,
   DarkListGroupItem,
 } from '../../src/react-jsx/components/ListGroup/ListGroupItem/ListGroupItem';
+
+export { default as Modal } from '../../src/react-jsx/components/Modal/Modal/Modal';
+export { default as ModalBody } from '../../src/react-jsx/components/Modal/ModalBody/ModalBody';
+export { default as ModalFooter } from '../../src/react-jsx/components/Modal/ModalFooter/ModalFooter';
+export { default as ModalHeader } from '../../src/react-jsx/components/Modal/ModalHeader/ModalHeader';
+export { default as ModalTitle } from '../../src/react-jsx/components/Modal/ModalTitle/ModalTitle';
