@@ -100,4 +100,51 @@ describe('AccordionItem', () => {
     // Should be called with event and id
     expect(handleClick.mock.calls[0][1]).toBe('click');
   });
+
+  it('renders only collapse when isSingleCollapse is true', () => {
+    render(
+      <AccordionItem
+        id="single"
+        isSingleCollapse
+        title="SingleCollapse"
+        collapseClassName="collapse-class"
+        bodyClassName="body-class"
+        show
+        data-testid="collapse-single"
+      >
+        Single Collapse Content
+      </AccordionItem>
+    );
+    const collapse = screen.getByTestId('collapse-single');
+    expect(collapse).toBeInTheDocument();
+    expect(collapse).toHaveClass('collapse-class');
+    expect(collapse).not.toHaveClass(`${PREFIX}accordion-collapse`);
+    expect(collapse).toHaveAttribute('id', 'single');
+    expect(collapse.querySelector('.body-class')).toHaveTextContent('Single Collapse Content');
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  it('renders collapse with navbar-collapse when isSingleCollapse and isNavCollapse are true', () => {
+    render(
+      <AccordionItem
+        id="navcollapse"
+        isSingleCollapse
+        isNavCollapse
+        collapseClassName="collapse-class"
+        bodyClassName="body-class"
+        show
+        data-testid="collapse-navcollapse"
+      >
+        Nav Collapse Content
+      </AccordionItem>
+    );
+    const collapse = screen.getByTestId('collapse-navcollapse');
+    expect(collapse).toBeInTheDocument();
+    expect(collapse).toHaveClass('collapse-class');
+    expect(collapse).toHaveClass(`${PREFIX}navbar-collapse`);
+    expect(collapse).not.toHaveClass(`${PREFIX}accordion-collapse`);
+    expect(collapse).toHaveAttribute('id', 'navcollapse');
+    expect(collapse.querySelector('.body-class')).toHaveTextContent('Nav Collapse Content');
+    expect(screen.queryByRole('button')).toBeNull();
+  });
 });
