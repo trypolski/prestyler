@@ -85,3 +85,12 @@ export { default as ModalBody } from '../../src/react-jsx/components/Modal/Modal
 export { default as ModalFooter } from '../../src/react-jsx/components/Modal/ModalFooter/ModalFooter';
 export { default as ModalHeader } from '../../src/react-jsx/components/Modal/ModalHeader/ModalHeader';
 export { default as ModalTitle } from '../../src/react-jsx/components/Modal/ModalTitle/ModalTitle';
+
+export { default as Navbar } from '../../src/react-jsx/components/Navbar/Navbar/Navbar';
+export { default as NavbarBrand } from '../../src/react-jsx/components/Navbar/NavbarBrand/NavbarBrand';
+export { default as NavbarCollapse } from '../../src/react-jsx/components/Navbar/NavbarCollapse/NavbarCollapse';
+export { default as NavbarLink } from '../../src/react-jsx/components/Navbar/NavbarLink/NavbarLink';
+export { default as NavbarList } from '../../src/react-jsx/components/Navbar/NavbarList/NavbarList';
+export { default as NavbarListItem } from '../../src/react-jsx/components/Navbar/NavbarListItem/NavbarListItem';
+export { default as NavbarText } from '../../src/react-jsx/components/Navbar/NavbarText/NavbarText';
+export { default as NavbarToggle } from '../../src/react-jsx/components/Navbar/NavbarToggle/NavbarToggle';
