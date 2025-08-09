@@ -36,6 +36,7 @@ export default function AccordionItem({
   show = false,
   horizontal = false,
   bodyWidth = '',
+  isNavCollapse = false,
 }) {
   const prefix = usePrestylerPrefix();
   const { toggleItem, isItemOpen } = isSingleCollapse
@@ -105,6 +106,7 @@ export default function AccordionItem({
       isSingleCollapse ? '' : 'accordion-collapse',
       horizontal ? 'collapse-horizontal' : '',
       'collapse',
+      isNavCollapse ? 'navbar-collapse' : '',
     ],
     prefix,
     useBsClasses,
@@ -178,4 +180,5 @@ AccordionItem.propTypes = {
   show: PropTypes.bool,
   horizontal: PropTypes.bool,
   bodyWidth: PropTypes.string,
+  isNavCollapse: PropTypes.bool,
 };
