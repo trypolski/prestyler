@@ -94,3 +94,5 @@ export { default as NavbarList } from '../../src/react-jsx/components/Navbar/Nav
 export { default as NavbarListItem } from '../../src/react-jsx/components/Navbar/NavbarListItem/NavbarListItem';
 export { default as NavbarText } from '../../src/react-jsx/components/Navbar/NavbarText/NavbarText';
 export { default as NavbarToggle } from '../../src/react-jsx/components/Navbar/NavbarToggle/NavbarToggle';
+
+export { default as Nav } from '../../src/react-jsx/components/Nav/Nav';
