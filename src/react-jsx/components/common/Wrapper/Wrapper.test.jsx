@@ -70,6 +70,24 @@ describe('Wrapper', () => {
     expect(ul).toHaveAttribute('data-testid', 'my-wrapper');
   });
 
+  it('renders with wrapperClass and ol tag', () => {
+    render(
+      <Wrapper
+        tag="ol"
+        wrapperClass="my-wrapper-class"
+        className="custom-class"
+        data-testid="my-wrapper"
+      >
+        Wrapper Content
+      </Wrapper>
+    );
+    const ol = screen.getByText('Wrapper Content').closest('ol');
+    expect(ol).toBeInTheDocument();
+    expect(ol).toHaveClass(`${PREFIX}my-wrapper-class`);
+    expect(ol).toHaveClass('custom-class');
+    expect(ol).toHaveAttribute('data-testid', 'my-wrapper');
+  });
+
   it('renders with wrapperClass and li tag', () => {
     render(
       <Wrapper
