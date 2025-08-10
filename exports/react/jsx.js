@@ -96,3 +96,8 @@ export { default as NavbarText } from '../../src/react-jsx/components/Navbar/Nav
 export { default as NavbarToggle } from '../../src/react-jsx/components/Navbar/NavbarToggle/NavbarToggle';
 
 export { default as Nav } from '../../src/react-jsx/components/Nav/Nav';
+
+export { default as Offcanvas } from '../../src/react-jsx/components/Offcanvas/Offcanvas/Offcanvas';
+export { default as OffcanvasBody } from '../../src/react-jsx/components/Offcanvas/OffcanvasBody/OffcanvasBody';
+export { default as OffcanvasHeader } from '../../src/react-jsx/components/Offcanvas/OffcanvasHeader/OffcanvasHeader';
+export { default as OffcanvasTitle } from '../../src/react-jsx/components/Offcanvas/OffcanvasTitle/OffcanvasTitle';
