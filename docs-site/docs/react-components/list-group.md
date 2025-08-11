@@ -2,7 +2,7 @@
 sidebar_position: 12
 ---
 
-# ListGroup Components
+# ListGroup
 
 The Prestyler ListGroup components provide a flexible, accessible, and customizable way to display lists of content with Bootstrap styles.
 As all other components, list groups support `useBsClasses` boolean props to remove Bootrstrap classes and always can be customize using `className` and own CSS classes.

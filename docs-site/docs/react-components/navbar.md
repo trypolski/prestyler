@@ -2,7 +2,7 @@
 sidebar_position: 14
 ---
 
-# Navbar Components
+# Navbar
 
 The Prestyler Navbar suite provides composable components to build Bootstrap-style navigation bars with React. Each subcomponent focuses on a specific part of the navbar and works together via an internal context.
 

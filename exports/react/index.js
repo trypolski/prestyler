@@ -101,3 +101,7 @@ export { default as Offcanvas } from '../../src/react-js/components/Offcanvas/Of
 export { default as OffcanvasBody } from '../../src/react-js/components/Offcanvas/OffcanvasBody/OffcanvasBody';
 export { default as OffcanvasHeader } from '../../src/react-js/components/Offcanvas/OffcanvasHeader/OffcanvasHeader';
 export { default as OffcanvasTitle } from '../../src/react-js/components/Offcanvas/OffcanvasTitle/OffcanvasTitle';
+
+export { default as Pagination } from '../../src/react-js/components/Pagination/Pagination/Pagination';
+export { default as PaginationItem } from '../../src/react-js/components/Pagination/PaginationItem/PaginationItem';
+export { default as PaginationLink } from '../../src/react-js/components/Pagination/PaginationLink/PaginationLink';
