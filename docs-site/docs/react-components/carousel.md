@@ -2,7 +2,7 @@
 sidebar_position: 9
 ---
 
-# Carousel Components
+# Carousel
 
 The Prestyler Carousel suite provides flexible, composable components for building Bootstrap-style carousels. Each subcomponent is designed for a specific carousel section, allowing you to compose interactive, accessible carousels with ease.
 

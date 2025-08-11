@@ -2,7 +2,7 @@
 sidebar_position: 13
 ---
 
-# Modal Components
+# Modal
 
 The Prestyler Modal system provides a flexible, accessible, and customizable modal dialog solution.  
 You can use these components together to build modals that match Bootstrap’s look and feel, with full React control and optional support for [react-modal](https://github.com/reactjs/react-modal) for accessibility and logic.

@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# Card Components
+# Card
 
 The Prestyler Card suite provides flexible, composable components for building Bootstrap-style cards. Each subcomponent is designed for a specific card section, allowing you to compose complex card layouts with ease.
 

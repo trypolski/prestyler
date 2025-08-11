@@ -2,7 +2,7 @@
 sidebar_position: 16
 ---
 
-# Offcanvas Components
+# Offcanvas
 
 The Prestyler Offcanvas suite provides a flexible, accessible sliding panel with a backdrop and body scroll locking. It includes subcomponents for a standard header, title, and body, and supports controlled open/close with transition phases.
 

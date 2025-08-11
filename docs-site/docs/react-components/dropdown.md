@@ -2,7 +2,7 @@
 sidebar_position: 11
 ---
 
-# Dropdown Components
+# Dropdown
 
 The Prestyler Dropdown system provides a flexible, accessible, and customizable dropdown menu solution.
 You can use these components together to build dropdowns that match Bootstrap’s look and feel, but with full React control and optional support for [@floating-ui/react-dom](https://floating-ui.com/docs/react-dom) for advanced positioning.
